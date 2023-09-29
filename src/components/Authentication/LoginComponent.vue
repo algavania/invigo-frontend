@@ -16,7 +16,7 @@
                             <div style="height: 100%;">
                                 <div id="close-button" @click="dialog = false"
                                     class="pa-10 d-flex align-center hover-pointer" style="width: fit-content;">
-                                    <v-icon icon="mdi-close" size="large" color="white" />
+                                    <v-icon color="white">mdi-close</v-icon>
                                     <p class="label-size font-weight-medium white--text ml-3 mb-1">
                                         Tutup
                                     </p>
