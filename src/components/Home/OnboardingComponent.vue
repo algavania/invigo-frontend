@@ -6,7 +6,7 @@
           <h2 class="subheading-size font-weight-medium">
             {{ title }}
           </h2>
-          <p class="text-gray700 label-size mt-2">
+          <p class="gray700--text label-size mt-2">
             {{ description }}
           </p>
         </v-col>
@@ -32,7 +32,7 @@
           <h2 class="subheading-size font-weight-medium">
             {{ title }}
           </h2>
-          <p class="text-gray700 label-size mt-2">
+          <p class="gray700--text label-size mt-2">
             {{ description }}
           </p>
         </v-col>

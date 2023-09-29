@@ -35,8 +35,7 @@
                 <RegisterComponent
                   v-else
                   :buttonText="link.text"
-                  :isFilledButton="true"
-                />
+                  :isFilledButton="true"></RegisterComponent>
               </div>
             </v-toolbar-items>
             <v-toolbar-items class="toolbar-item" v-else>
@@ -57,7 +56,7 @@
                   elevation="0"
                   height="50"
                   :active="$route.path == link.to"
-                  class="mr-3 btn-toolbar text-white"
+                  class="mr-3 btn-toolbar white--text"
                   :to="link.to"
                   v-else
                 >

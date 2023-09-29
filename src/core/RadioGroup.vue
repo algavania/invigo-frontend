@@ -3,9 +3,9 @@
         <v-radio-group :v-model="groupModel" inline>
             <div class="pt-1 pb-0 px-2 my-1 radio-container rounded-lg w-100 my-0" v-for="radioValue in values"
                 :key="radioValue">
-                <v-radio :value="radioValue" color="primary">
+                <v-radio :value="radioValue" color="primary" class="py-3">
                     <template v-slot:label>
-                        <p class="text-black">{{ radioValue }}</p>
+                        <div class="text-black">{{ radioValue }}</div>
                     </template>
                 </v-radio>
             </div>
@@ -15,9 +15,9 @@
         <v-radio-group :v-model="groupModel" inline>
             <div class="pt-1 pb-0 px-2 my-1 radio-container rounded-lg w-100 my-0" v-for="radioValue in values"
                 :key="radioValue">
-                <v-radio :value="radioValue" color="primary">
+                <v-radio :value="radioValue" color="primary" class="py-3">
                     <template v-slot:label>
-                        <p class="text-black">{{ radioValue }}</p>
+                        <div class="text-black">{{ radioValue }}</div>
                     </template>
                 </v-radio>
             </div>

@@ -5,10 +5,10 @@
         class="w-100 bg-orange-gradient rounded-lg d-flex flex-column justify-center align-center text-center"
         style="height: 18rem; position: relative"
       >
-        <h2 class="subheading-size text-white font-weight-medium">
+        <h2 class="subheading-size white--text font-weight-medium">
           Mulai kembangkan sekarang
         </h2>
-        <p class="text-white label-size mt-2" style="max-width: 20rem">
+        <p class="white--text label-size mt-2" style="max-width: 20rem">
           Bergabung dan dapatkan efisiensi kecepatan bisnis Anda.
         </p>
         <img
@@ -25,26 +25,26 @@
     </div>
     <v-row class="mt-10">
       <v-slide-group class="w-100">
-        <v-slide-group-item v-for="data in investors" :key="data.uid">
+        <v-slide-item v-for="data in investors" :key="data.uid">
           <ServiceCardComponent
             :data="data"
-            :total="data['totalInvestments']"
+            :total="data['totalInvestment']"
             :type="data['typeData']"
             class="mr-5"
           />
-        </v-slide-group-item>
+        </v-slide-item>
       </v-slide-group>
     </v-row>
     <v-row class="mt-10">
       <v-slide-group class="w-100" show-arrows="never">
-        <v-slide-group-item v-for="data in lawFirms" :key="data.uid">
+        <v-slide-item v-for="data in lawFirms" :key="data.uid">
           <ServiceCardComponent
             :data="data"
             :total="data['totalClient']"
             :type="data['typeData']"
             class="mr-5"
           />
-        </v-slide-group-item>
+        </v-slide-item>
       </v-slide-group>
     </v-row>
   </v-container>

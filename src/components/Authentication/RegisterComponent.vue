@@ -1,5 +1,5 @@
 <template>
-  <v-dialog class="w-75" v-model="dialogVisible">
+  <v-dialog class="w-75" v-model="dialogVisible" width="75%">
     <template v-slot:activator="{ on, attrs }">
       <v-btn
         v-if="isFilledButton"
@@ -7,7 +7,7 @@
         v-on="on"
         height="50"
         color="primary"
-        class="text-white"
+        class="white--text"
         >{{ buttonText }}</v-btn
       >
       <p v-else class="small-body-size">
@@ -15,7 +15,7 @@
         <span
           v-bind="attrs"
           v-on="on"
-          class="text-primary font-weight-medium hover-pointer-text"
+          class="primary--text font-weight-medium hover-pointer-text"
           >Daftar</span
         >
       </p>
@@ -34,7 +34,7 @@
                   style="width: fit-content"
                 >
                   <v-icon icon="mdi-close" size="large" color="white" />
-                  <p class="label-size font-weight-medium text-white ml-3 mb-1">
+                  <p class="label-size font-weight-medium white--text ml-3 mb-1">
                     Tutup
                   </p>
                 </div>
@@ -50,7 +50,7 @@
             <v-col cols="6">
               <div class="py-10 px-12 h-100" style="position: relative">
                 <p class="label-size font-weight-medium">Buat Akun Baru</p>
-                <div class="bg-slate200 step-indicator d-flex mt-6 mb-8">
+                <div class="slate200 step-indicator d-flex mt-6 mb-8">
                   <div
                     style="flex: 4"
                     class="bg-green-gradient step-indicator"
@@ -82,12 +82,12 @@
                   <p class="small-body-size mb-2">
                     Dengan mendaftarkan akun, Anda telah menyetujui
                     <span
-                      class="text-primary font-weight-medium hover-pointer-text"
+                      class="primary--text font-weight-medium hover-pointer-text"
                       >Kebijakan Privasi</span
                     >
                     serta
                     <span
-                      class="text-primary font-weight-medium hover-pointer-text"
+                      class="primary--text font-weight-medium hover-pointer-text"
                       >Syarat & Ketentuan.</span
                     >
                   </p>
@@ -163,12 +163,12 @@
                   <p class="small-body-size">
                     Dengan mendaftarkan akun, Anda telah menyetujui
                     <span
-                      class="text-primary font-weight-medium hover-pointer-text"
+                      class="primary--text font-weight-medium hover-pointer-text"
                       >Kebijakan Privasi</span
                     >
                     serta
                     <span
-                      class="text-primary font-weight-medium hover-pointer-text"
+                      class="primary--text font-weight-medium hover-pointer-text"
                       >Syarat & Ketentuan.</span
                     >
                   </p>
@@ -188,7 +188,7 @@
                   <p class="small-body-size mb-2">
                     Silakan cek email
                     <span
-                      class="text-primary font-weight-medium hover-pointer-text"
+                      class="primary--text font-weight-medium hover-pointer-text"
                       >blablabla@gmail.com</span
                     >
                     yang telah didaftarkan untuk konfirmasi.
@@ -222,7 +222,7 @@ export default {
     RadioGroup,
     LoginComponent,
   },
-  props: ["buttonText", "isFilledButton"],
+  props: ["buttonText", "isFilledButton", "isVisible"],
   data: () => ({
     dialogVisible: false,
     currentStep: 1,
@@ -250,6 +250,11 @@ export default {
       (v) => v === this.password || "Password tidak sama",
     ],
   }),
+  mounted() {
+    if (this.isVisible) {
+      this.dialogVisible = true;
+    }
+  },
   methods: {
     closeDialog() {
       this.dialogVisible = false;
