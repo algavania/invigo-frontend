@@ -79,12 +79,17 @@ export default {
 }
 
 .subheading-size {
-  font-size: 2.4rem;
-  line-height: 3.2rem;
+  font-size: 2.2rem;
+  line-height: 3rem;
 }
 
 .label-size {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  line-height: 1.4rem;
+}
+
+.small-label-size {
+  font-size: 1.2rem;
   line-height: 1.4rem;
 }
 
