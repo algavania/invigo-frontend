@@ -1,0 +1,101 @@
+<template>
+  <v-app>
+    <v-dialog v-model="loading" fullscreen transition="fade-transition">
+      <v-container fluid fill-height style="background-color: rgba(255, 255, 255, 0.5)">
+        <v-layout justify-center align-center>
+          <center>
+            <v-row>
+              <v-col cols="12">
+                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+              </v-col>
+            </v-row>
+          </center>
+        </v-layout>
+      </v-container>
+    </v-dialog>
+
+    <NavBar />
+    <router-view></router-view>
+    <FooterSection />
+  </v-app>
+</template>
+
+<script>
+import NavBar from "./core/NavBar.vue";
+import FooterSection from "./core/Footer.vue";
+
+export default {
+  name: "App",
+  components: {
+    NavBar,
+    FooterSection
+  },
+  data: () => ({
+    loading: false,
+  })
+}
+</script>
+
+<style>
+* {
+  font-family: "Ubuntu", "Roboto", sans-serif !important;
+}
+
+.header-size {
+  font-size: 3rem;
+  line-height: 3.4rem;
+}
+
+.subheading-size {
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+}
+
+.label-size {
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+}
+
+.big-body-size {
+  font-size: 1.1rem;
+}
+
+.small-body-size {
+  font-size: 0.9rem;
+}
+
+.v-btn {
+  border-radius: 8px !important;
+  text-transform: none !important;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+.bg-green-gradient {
+  background: linear-gradient(101deg, #064e3b -2.44%, #022c22 60.94%) !important;
+}
+
+.bg-orange-gradient {
+  background: linear-gradient(101deg, #F97316 -2.44%, #EA580C 60.94%) !important;
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
+}
+
+.hover-pointer-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+</style>
