@@ -1,12 +1,19 @@
 <template>
   <v-app>
     <v-dialog v-model="loading" fullscreen transition="fade-transition">
-      <v-container fluid fill-height style="background-color: rgba(255, 255, 255, 0.5)">
+      <v-container
+        fluid
+        fill-height
+        style="background-color: rgba(255, 255, 255, 0.5)"
+      >
         <v-layout justify-center align-center>
           <center>
             <v-row>
               <v-col cols="12">
-                <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                <v-progress-circular
+                  indeterminate
+                  color="primary"
+                ></v-progress-circular>
               </v-col>
             </v-row>
           </center>
@@ -17,23 +24,48 @@
     <NavBar />
     <router-view></router-view>
     <FooterSection />
+    <v-snackbar :color="color" v-model="snackbar" :timeout="timeout">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
 import NavBar from "./core/NavBar.vue";
 import FooterSection from "./core/Footer.vue";
+import { EventBus } from "./event-bus";
 
 export default {
   name: "App",
   components: {
     NavBar,
-    FooterSection
+    FooterSection,
   },
   data: () => ({
     loading: false,
-  })
-}
+    snackbar: false,
+    text: "",
+    timeout: 3000,
+    color: "red",
+  }),
+  mounted() {
+    EventBus.$on("showSnackbar", (text, isSuccess) => {
+      this.text = text;
+      this.color = isSuccess ? 'green' : 'red';
+      this.snackbar = true;
+    });
+    EventBus.$on("startLoading", () => (this.loading = true));
+    EventBus.$on("stopLoading", () => {
+      this.loading = false;
+    });
+  },
+};
 </script>
 
 <style>
@@ -83,11 +115,19 @@ nav a.router-link-exact-active {
 }
 
 .bg-green-gradient {
-  background: linear-gradient(101deg, #064e3b -2.44%, #022c22 60.94%) !important;
+  background: linear-gradient(
+    101deg,
+    #064e3b -2.44%,
+    #022c22 60.94%
+  ) !important;
 }
 
 .bg-orange-gradient {
-  background: linear-gradient(101deg, #F97316 -2.44%, #EA580C 60.94%) !important;
+  background: linear-gradient(
+    101deg,
+    #f97316 -2.44%,
+    #ea580c 60.94%
+  ) !important;
 }
 
 .hover-pointer:hover {

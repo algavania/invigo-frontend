@@ -7,6 +7,7 @@
         v-on="on"
         height="50"
         color="primary"
+        @click="checkAuth()"
         class="white--text"
         >{{ buttonText }}</v-btn
       >
@@ -34,7 +35,9 @@
                   style="width: fit-content"
                 >
                   <v-icon icon="mdi-close" size="large" color="white" />
-                  <p class="label-size font-weight-medium white--text ml-3 mb-1">
+                  <p
+                    class="label-size font-weight-medium white--text ml-3 mb-1"
+                  >
                     Tutup
                   </p>
                 </div>
@@ -212,9 +215,10 @@
 </template>
 
 <script>
-/* eslint-disable */
 import LoginComponent from "../Authentication/LoginComponent.vue";
 import RadioGroup from "../../core/RadioGroup.vue";
+import { register } from "../../db/auth.js";
+import { EventBus } from "../../event-bus.js";
 
 export default {
   name: "RegisterComponent",
@@ -250,17 +254,47 @@ export default {
       (v) => v === this.password || "Password tidak sama",
     ],
   }),
-  mounted() {
-    if (this.isVisible) {
-      this.dialogVisible = true;
-    }
-  },
   methods: {
+    checkAuth() {
+      this.dialogVisible = false;
+      if (localStorage.getItem("user")) {
+        if (this.$route.name != "dashboard") {
+          this.$router.push({ name: "dashboard" });
+        }
+        setTimeout(() => {
+          this.dialogVisible = false;
+        }, 0);
+      }
+    },
     closeDialog() {
       this.dialogVisible = false;
       this.currentStep = 1;
     },
-    async register() {},
+    async register() {
+      if (this.currentStep == 2) {
+        if (this.$refs.form.validate()) {
+          EventBus.$emit("startLoading");
+          try {
+            this.name = "";
+            this.email = "";
+            this.username = "";
+            this.password = "";
+            this.confirmPassword = "";
+            await register(
+              this.name,
+              this.username,
+              this.selectedRole,
+              this.email,
+              this.password
+            );
+            this.closeDialog();
+          } catch (e) {
+            EventBus.$emit("showSnackbar", e, false);
+          }
+          EventBus.$emit("stopLoading");
+        }
+      }
+    },
   },
 };
 </script>
