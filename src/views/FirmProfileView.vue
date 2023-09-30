@@ -84,6 +84,9 @@
                             </v-card>
                         </v-dialog>
                     </div>
+                    <div v-for="lawService in lawServices" :key="lawService">
+                        <LawServiceComponent :data="lawService" />
+                    </div>
 
                     <div class="d-flex mt-6" style="gap: 1rem;">
                         <v-btn color="primary" height="50" elevation="0" class="flex-grow-1">
@@ -100,8 +103,13 @@
 </template>
 
 <script>
+import LawServiceComponent from '../components/Profile/LawServiceComponent.vue';
+
 export default {
     name: "FirmProfileView",
+    components: {
+        LawServiceComponent
+    },
     data: () => ({
         dialog: false,
         items: [
@@ -112,6 +120,20 @@ export default {
             {
                 text: "Profil",
                 disabled: false,
+            },
+        ],
+        lawServices: [
+            {
+                service: "Pengurusan NIB OSS",
+                description: "Layanan ini memungkinkan para pengusaha untuk mendapatkan Nomor Induk Berusaha (NIB) melalui sistem Online Single Submission (OSS).",
+            },
+            {
+                service: "Pendirian CV dan PT",
+                description: "Comanditer Cenootschap (CV) dan Perseroan Terbatas (PT) adalah badan usaha yang didirikan min. 2 orang dan paling banyak tidak terbatas.",
+            },
+            {
+                service: "Sertifikasi SKA",
+                description: "SKA (Sertifikat keahlian) dikeluarkan oleh Asosiasi profesi yang ter-AKREDITASI LPJK.",
             },
         ],
         isPublic: true,

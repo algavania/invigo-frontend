@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="slate50 pa-4" :class="data.title ? 'mt-3' : ''" style="width: 100%; border-radius: 12px">
+    <div class="slate50 pa-4 mt-3" style="width: 100%; border-radius: 12px">
       <div class="d-flex align-center" style="gap: 1rem;">
         <div class="white rounded-lg pa-3">
           <img v-if="data.type == 'Document'" :src="require(`@/assets/ic-pdf.svg`)"
