@@ -6,6 +6,7 @@ import DetailInvestorView from "../views/DetailInvestorView.vue";
 import DetailInovatorView from "../views/DetailInovatorView.vue";
 import DetailFirmView from "../views/DetailFirmView.vue";
 import ProfileView from "../views/ProfileView.vue";
+import ChatView from "../views/ChatView.vue";
 import VueRouter from "vue-router";
 import auth from "../middlewares/auth";
 
@@ -37,6 +38,14 @@ const router = new VueRouter({
       path: "/profile",
       name: "profile",
       component: ProfileView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/chat",
+      name: "chat",
+      component: ChatView,
       meta: {
         middleware: [auth],
       },
