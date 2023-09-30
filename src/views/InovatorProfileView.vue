@@ -68,7 +68,7 @@
                     <FileUploadComponent label="Demo Produk" description="" />
 
                     <div class="d-flex align-center">
-                        <p class="font-weight-bold ma-0 flex-grow-1">Dokumen Legal</p>
+                        <p class="font-weight-medium ma-0 flex-grow-1">Dokumen Legal</p>
                         <v-dialog v-model="dialog" width="500">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn icon v-bind="attrs" v-on="on">
@@ -87,30 +87,29 @@
                                 </v-card-title>
 
                                 <v-card-text class="mt-6 pb-0">
-                                    <v-select v-model="uploadType" label="Tipe Unggahan" :items="['Dokumen', 'Tautan']" outlined dense class="mb-2" />
+                                    <v-select v-model="uploadType" label="Tipe Unggahan" :items="['Dokumen', 'Tautan']"
+                                        outlined dense class="mb-2" />
                                     <div v-if="uploadType == 'Dokumen'">
                                         <v-text-field label="Judul" type="text" v-model="documentTitle" outlined dense />
-                                        <FileUploadComponent label="Dokumen" description="Dokumen PDF dengan ukuran maksimal 5mb." />
+                                        <FileUploadComponent label="Dokumen"
+                                            description="Dokumen PDF dengan ukuran maksimal 5mb." />
                                     </div>
                                     <div v-if="uploadType == 'Tautan'">
                                         <v-text-field label="Judul" type="text" v-model="documentTitle" outlined dense />
-                                        <v-text-field label="URL Tautan" type="text" v-model="documentURL" hint="https://" outlined dense />
+                                        <v-text-field label="URL Tautan" type="text" v-model="documentURL" hint="https://"
+                                            outlined dense />
                                     </div>
                                 </v-card-text>
 
                                 <v-card-actions v-if="uploadType != ''">
-                                    <v-btn color="primary" height="50" elevation="0" class="flex-grow-1 mb-2" style="width: 100%;">
+                                    <v-btn color="primary" height="50" elevation="0" class="flex-grow-1 mb-2"
+                                        style="width: 100%;">
                                         Tambah
                                     </v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
-
                     </div>
-                    <div>
-
-                    </div>
-
                     <div class="d-flex mt-6" style="gap: 1rem;">
                         <v-btn color="primary" height="50" elevation="0" class="flex-grow-1">
                             Simpan

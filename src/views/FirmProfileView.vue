@@ -36,65 +36,54 @@
                 </div>
 
                 <v-form ref="form">
-                    <v-text-field
-                      label="Nama"
-                      type="text"
-                      v-model="name"
-                      outlined
-                      dense
-                    />
-                    <v-text-field
-                      label="Username"
-                      type="text"
-                      v-model="username"
-                      outlined
-                      dense
-                    />
-                    <v-text-field
-                      label="Email"
-                      type="email"
-                      v-model="email"
-                      outlined
-                      dense
-                      disabled
-                    />
+                    <v-text-field label="Nama" type="text" v-model="name" outlined dense />
+                    <v-text-field label="Username" type="text" v-model="username" outlined dense />
+                    <v-text-field label="Email" type="email" v-model="email" outlined dense disabled />
 
                     <h6 class="label-size font-weight-bold my-5">
                         Kontak
                     </h6>
-                    <v-text-field
-                      label="Alamat"
-                      type="text"
-                      v-model="address"
-                      outlined
-                      dense
-                    />
-                    <v-text-field
-                      label="Jumlah Klien"
-                      type="text"
-                      v-model="clientAmount"
-                      outlined
-                      dense
-                    />
-                    <v-text-field
-                      label="Telepon"
-                      type="text"
-                      v-model="phone"
-                      outlined
-                      dense
-                    />
-                    <v-text-field
-                      label="Website"
-                      type="text"
-                      v-model="website"
-                      hint="https://"
-                      outlined
-                      dense
-                    />
+                    <v-text-field label="Alamat" type="text" v-model="address" outlined dense />
+                    <v-text-field label="Jumlah Klien" type="text" v-model="clientAmount" outlined dense />
+                    <v-text-field label="Telepon" type="text" v-model="phone" outlined dense />
+                    <v-text-field label="Website" type="text" v-model="website" hint="https://" outlined dense />
 
                     <h6 class="label-size font-weight-bold my-5">
                         Layanan
                     </h6>
+                    <div class="d-flex align-center">
+                        <p class="font-weight-medium ma-0 flex-grow-1">Layanan yang ditawarkan</p>
+                        <v-dialog v-model="dialog" width="500">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn icon v-bind="attrs" v-on="on">
+                                    <v-icon color="black" style="font-size: 1.8rem;">mdi-plus</v-icon>
+                                </v-btn>
+                            </template>
+
+                            <v-card>
+                                <v-card-title>
+                                    <div class="d-flex align-center" style="width: 100%;">
+                                        <p class="font-weight-bold ma-0 flex-grow-1">Tambah Layanan</p>
+                                        <v-btn icon v-bind="attrs" v-on="on" @click="dialog = false">
+                                            <v-icon class="gray500--text" style="font-size: 1.8rem;">mdi-close</v-icon>
+                                        </v-btn>
+                                    </div>
+                                </v-card-title>
+
+                                <v-card-text class="mt-6 pb-0">
+                                    <v-text-field label="Layanan" type="text" v-model="serviceTitle" outlined dense />
+                                    <v-text-field label="Deskripsi" type="text" v-model="serviceDescription" outlined dense />
+                                </v-card-text>
+
+                                <v-card-actions>
+                                    <v-btn color="primary" height="50" elevation="0" class="flex-grow-1 mb-2"
+                                        style="width: 100%;">
+                                        Tambah
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </div>
 
                     <div class="d-flex mt-6" style="gap: 1rem;">
                         <v-btn color="primary" height="50" elevation="0" class="flex-grow-1">
@@ -114,6 +103,7 @@
 export default {
     name: "FirmProfileView",
     data: () => ({
+        dialog: false,
         items: [
             {
                 text: "Beranda",
