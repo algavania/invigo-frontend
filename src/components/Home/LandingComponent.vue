@@ -1,18 +1,18 @@
 <template>
-  <div style="height: 80vh">
-    <v-row class="h-100" justify="center" align="center">
-      <v-col cols="auto">
+  <div style="height: 72vh" class="mt-4">
+    <div class="d-flex justify-center align-center">
+      <div style="flex: 2">
         <img
           src="../../assets/img-landing-left.svg"
           alt="Inovator"
-          class="w-100"
+          style="width: 100%;"
         />
-      </v-col>
-      <v-col align="center" justify="center">
+      </div>
+      <div style="flex: 4" class="text-center">
         <h1 class="font-weight-bold header-size">
           Wujudkan Impian Investasi dan Bisnis
         </h1>
-        <div class="my-4">
+        <div class="mt-4 mb-8">
           Menyambungkan Inovator dan Investor tanpa terikat ruang dan waktu agar
           akselerasi solusi inovatif menjadi pulih lebih cepat, bangkit lebih
           kuat.
@@ -20,16 +20,17 @@
         <RegisterComponent
           :buttonText="'Mulai Sekarang'"
           :isFilledButton="true"
+          :isAccentButton="false"
         ></RegisterComponent>
-      </v-col>
-      <v-col cols="auto">
+      </div>
+      <div style="flex: 2">
         <img
           src="../../assets/img-landing-right.svg"
           alt="Investor"
-          class="w-100"
+          style="width: 100%;"
         />
-      </v-col>
-    </v-row>
+      </div>
+    </div>
   </div>
 </template>
 

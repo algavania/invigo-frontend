@@ -27,7 +27,7 @@
                     </v-col>
                 </v-col>
             </v-row>
-            <img src="../../assets/bg-features.svg" alt="Background" class="background-image">
+            <img :src="require(`@/assets/bg-features.svg`)" alt="Background" class="background-image" style="z-index: 10 !important;">
         </div>
     </v-card>
 </template>

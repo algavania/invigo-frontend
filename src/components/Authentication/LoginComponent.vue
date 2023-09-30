@@ -99,6 +99,7 @@
                       <RegisterComponent
                         :buttonText="''"
                         :isFilledButton="false"
+                        :isAccentButton="false"
                       />
                     </div>
                   </v-form>

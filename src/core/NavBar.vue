@@ -16,7 +16,7 @@
                   height="50" :active="$route.path == link.to" class="mr-3" :ripple="false" :to="link.to">{{ link.text
                   }}</v-btn>
                 <LoginComponent v-else-if="link.to == '/masuk'" :isTextButton="true" />
-                <RegisterComponent v-else :buttonText="link.text" :isFilledButton="true"></RegisterComponent>
+                <RegisterComponent v-else :buttonText="link.text" :isFilledButton="true" :isAccentButton="false"></RegisterComponent>
               </div>
             </v-toolbar-items>
             <v-toolbar-items class="toolbar-item" v-else>
