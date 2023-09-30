@@ -2,6 +2,9 @@ import Vue from "vue";
 import HomeView from "../views/HomeView.vue";
 import DashboardView from "../views/DashboardView.vue";
 import DetailView from "../views/DetailView.vue";
+import DetailInvestorView from "../views/DetailInvestorView.vue";
+import DetailInovatorView from "../views/DetailInovatorView.vue";
+import DetailFirmView from "../views/DetailFirmView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import VueRouter from "vue-router";
 import auth from "../middlewares/auth";
@@ -42,6 +45,30 @@ const router = new VueRouter({
       path: "/detail/:username",
       name: "detail",
       component: DetailView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/investor/:username",
+      name: "detailInvestor",
+      component: DetailInvestorView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/inovator/:username",
+      name: "detailInovator",
+      component: DetailInovatorView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/firma/:username",
+      name: "detailLawFirm",
+      component: DetailFirmView,
       meta: {
         middleware: [auth],
       },

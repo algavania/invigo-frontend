@@ -20,7 +20,7 @@ async function login(email, password) {
   const docRef = doc(db, "users", userCredential.user.uid);
   const docSnap = await getDoc(docRef);
   var data = docSnap.data();
-  localStorage.setItem("user", data);
+  localStorage.setItem("user", JSON.stringify(data));
 }
 
 async function register(name, username, role, email, password) {

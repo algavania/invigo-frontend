@@ -1,6 +1,6 @@
 <template>
     <v-card style="width: 14rem;" class="rounded-lg ma-1"
-        :to="{ name: 'detail', params: { username: data['userData']['username'] } }">
+        :to="{ name: routeName, params: { username: data['userData']['username'] } }">
         <div class="accent800 w-100" style="height: 11rem;"></div>
         <div class="px-3 py-2 d-flex flex-column" style="height: 11 rem;">
             <div style="flex-grow: 1;">
@@ -39,7 +39,7 @@
 export default {
     name: "ServiceCardComponent",
     props: [
-        "data", "type", "total"
+        "data", "type", "total", "routeName"
     ]
 }
 </script>
