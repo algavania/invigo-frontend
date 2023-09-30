@@ -45,14 +45,14 @@ export default {
     },
     data: () => ({
         items: [
-        {
-            text: "Beranda",
-            disabled: true,
-        },
-        {
-            text: "Notifikasi",
-            disabled: false,
-        },
+          {
+              text: "Beranda",
+              disabled: true,
+          },
+          {
+              text: "Notifikasi",
+              disabled: false,
+          },
         ],
         notifications: [
             //type: notification, pitching acceptance, pitching request, new chat

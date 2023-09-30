@@ -132,7 +132,7 @@
                       <v-col cols="6">
                         <v-text-field
                           v-model="password"
-                          :append-inner-icon="
+                          :append-icon="
                             isPasswordObscure ? 'mdi-eye-off' : 'mdi-eye'
                           "
                           :type="isPasswordObscure ? 'password' : 'text'"
@@ -140,7 +140,7 @@
                           density="compact"
                           label="Kata Sandi"
                           variant="outlined"
-                          @click:append-inner="
+                          @click:append="
                             isPasswordObscure = !isPasswordObscure
                           "
                         />
@@ -149,14 +149,14 @@
                         <v-text-field
                           v-model="confirmPassword"
                           :rules="confirmPasswordRules"
-                          :append-inner-icon="
+                          :append-icon="
                             isConfirmObscure ? 'mdi-eye-off' : 'mdi-eye'
                           "
                           :type="isConfirmObscure ? 'password' : 'text'"
                           density="compact"
                           label="Konfirmasi"
                           variant="outlined"
-                          @click:append-inner="
+                          @click:append="
                             isConfirmObscure = !isConfirmObscure
                           "
                         />

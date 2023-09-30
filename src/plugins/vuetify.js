@@ -26,6 +26,7 @@ export default new Vuetify({
         gray50: "#F9FAFB",
         emerald800: "#065F46",
         emerald50: "#ECFDF5",
+        rose700: "BE123C",
         white: "#FFFFFF",
         black: "#000000",
       },
