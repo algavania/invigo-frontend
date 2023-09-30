@@ -104,7 +104,7 @@ export default {
             {
                 name: "Allianz X",
                 approvalDate: "Jul 28, 2023",
-                isActive: true,
+                isActive: false,
             },
         ],
         userRole: "",
