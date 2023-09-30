@@ -122,11 +122,6 @@ const router = new VueRouter({
       name: "futureDevelopment",
       component: FutureDevelopmentView,
     },
-    {
-      path: "/page-not-found",
-      name: "pageNotFound",
-      component: PageNotFoundView,
-    },
     // {
     //   path: "/collaborators",
     //   name: "collaborators",
@@ -166,6 +161,10 @@ const router = new VueRouter({
       meta: {
         middleware: [auth],
       },
+    },
+    {
+      path: "/:notFound",
+      component: PageNotFoundView,
     },
   ],
 });
