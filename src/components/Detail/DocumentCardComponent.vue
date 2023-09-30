@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="font-weight-medium gray800--text" v-if="data.title">{{ data.title }}</div>
-    <div class="slate50 pa-4" :class="data.title ? 'mt-3' : ''" style="width: 100%; border-radius: 12px">
+    <div class="slate50 pa-5" :class="data.title ? 'mt-3' : ''" style="width: 100%; border-radius: 12px">
       <v-row v-if="data.url">
-        <v-col cols="2">
+        <v-col cols="2" class="white rounded-lg">
           <img
             :src="require(`@/assets/ic-pdf.svg`)"
-            style="width: 100%; height: 4rem"
-            class="pa-0"
+            style="width: 100%; height: 3.2rem"
+            class="pa-0 my-1"
           />
         </v-col>
         <v-col cols="6">
