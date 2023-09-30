@@ -39,29 +39,35 @@
               </div>
             </v-toolbar-items>
             <v-toolbar-items class="toolbar-item" v-else>
-              <div v-for="link in links.afterLogin" :key="link.to">
-                <v-btn
-                  v-if="link.to != '/berlangganan'"
-                  variant="text"
-                  text
-                  height="50"
-                  :active="$route.path == link.to"
-                  class="mr-3"
-                  :ripple="false"
-                  elevation="0"
-                  :to="link.to"
-                  >{{ link.text }}</v-btn
-                >
-                <v-btn
-                  elevation="0"
-                  height="50"
-                  :active="$route.path == link.to"
-                  class="mr-3 btn-toolbar white--text"
-                  :to="link.to"
-                  v-else
-                >
-                  {{ link.text }}
-                </v-btn>
+              <div class="d-flex align-center">
+                <div class="d-flex">
+                  <div v-for="link in links.afterLogin" :key="link.to">
+                    <v-btn
+                      height="50"
+                      :active="$route.path == link.to"
+                      class="mr"
+                      :ripple="false"
+                      elevation="0"
+                      :to="link.to"
+                      >
+                      <v-icon v-if="$route.path == link.to" class="slate900--text">
+                        {{ link.icon }}
+                      </v-icon>
+                      <v-icon v-else class="slate500--text">
+                        {{ link.icon }}
+                      </v-icon>
+                    </v-btn>
+                  </div>
+                </div>
+
+                <div class="d-flex align-center ml-10 hover-pointer">
+                  <div class="profile-picture"></div>
+                  <div class="mx-2">
+                    <p class="ma-0 font-weight-medium">{{ displayName }}</p>
+                    <p class="small-body-size gray700--text ma-0">{{ userName }}</p>
+                  </div>
+                  <v-icon class="gray300--text">mdi-chevron-down</v-icon>
+                </div>
               </div>
             </v-toolbar-items>
           </v-col>
@@ -89,8 +95,8 @@
               text
               :to="link.to"
               class="font-weight-medium"
-              >{{ link.text }}</v-btn
-            >
+              >{{ link.text }}
+            </v-btn>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -129,15 +135,25 @@ export default {
         { to: "/coba-sekarang", text: "Coba Sekarang" },
       ],
       afterLogin: [
-        { to: "/", text: "Beranda" },
-        { to: "/pesan", text: "Pesan" },
-        { to: "/notifikasi", text: "Notifikasi" },
-        { to: "/berlangganan", text: "Berlangganan" },
+        { to: "/dashboard", icon: "mdi-home" },
+        { to: "/chat", icon: "mdi-chat" },
+        { to: "/notification", icon: "mdi-bell" },
       ],
     },
     drawer: false,
     hasLogin: false,
+    displayName: "",
+    userName: "",
   }),
+  mounted() {
+    this.hasLogin = localStorage.getItem('user') != null;
+
+    if (this.hasLogin) {
+      let user = JSON.parse(localStorage.getItem('user'));
+      this.displayName = user.name;
+      this.userName = user.username;
+    }
+  }
 };
 </script>
 
@@ -161,6 +177,13 @@ export default {
 
 .appbar-icon {
   display: none;
+}
+
+.profile-picture {
+  width: 3rem;
+  height: 3rem;
+  background-color: #064e3b;
+  border-radius: 100%;
 }
 
 @media screen and (max-width: 860px) {
