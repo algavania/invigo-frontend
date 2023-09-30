@@ -2,10 +2,10 @@
     <v-container>
         <div class="text-center mb-16 d-flex flex-column align-center justify-center" style="height: 60vh;">
             <h1 class="text-green-gradient" style="font-size: 3rem;">
-                Halaman dalam Pengembangan
+                Halaman Tidak Ditemukan
             </h1>
             <p class="label-size ma-0 mt-4" style="max-width: 48rem; line-height: 1.7rem;">
-                Sayangnya, halaman yang kamu tuju sedang dalam masa pengembangan, nih. Tunggu update selanjutnya ya!
+                Hmmm... halaman yang kamu tujui tidak ditemukan. Kamu bisa cek kembali alamat yang kamu tuju, atau kembali ke halaman sebelumnya.
             </p>
         </div>
     </v-container>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name: "FutureDevelopmentView"
+    name: "PageNotFoundView"
 }
 </script>
 
