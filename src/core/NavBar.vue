@@ -1,10 +1,12 @@
 <template>
-  <nav class="pa-0">
-    <v-toolbar height="100" color="gray50" class="py-4">
+  <nav class="pa-0" elevation="0">
+    <v-app-bar elevation="0" height="100" color="white" class="pt-1 pb-4">
       <v-container>
-        <v-row>
-          <v-col class="d-flex align-start justify-start">
-            <v-img :src="require('@/assets/logo_letter.png')" alt="Logo" height="50" width="50" contain />
+        <div class="d-flex">
+          <v-col style="position: relative;">
+            <router-link to="/">
+              <img :src="require('@/assets/logo_letter.png')" alt="Logo" height="70%" class="d-block" style="position: absolute; left: 0; top: 0; bottom: 0; margin: auto;" />
+            </router-link>
           </v-col>
           <v-spacer></v-spacer>
           <v-col justify-end align-self="center">
@@ -22,7 +24,7 @@
                 <div class="d-flex">
                   <div v-for="link in links.afterLogin" :key="link.to">
                     <v-btn height="50" :active="$route.path == link.to" class="mr" :ripple="false" elevation="0"
-                      :to="link.to">
+                      :to="link.to" color="white">
                       <v-icon v-if="$route.path == link.to" class="slate900--text">
                         {{ link.icon }}
                       </v-icon>
@@ -79,9 +81,9 @@
             </v-toolbar-items>
           </v-col>
           <v-app-bar-nav-icon class="appbar-icon align-self-center" @click="drawer = !drawer"></v-app-bar-nav-icon>
-        </v-row>
+        </div>
       </v-container>
-    </v-toolbar>
+    </v-app-bar>
 
     <v-navigation-drawer app v-model="drawer" temporary location="right" disable-resize-watcher>
       <v-list dense v-if="!hasLogin">
