@@ -189,6 +189,16 @@ async function getDataByUsername(username) {
           industryData.push(docSnap.data()["name"]);
         }
         data["industriesData"] = industryData;
+
+        const ref = collection(db, "innovators", document.id, "legalDocs");
+        const snap = await getDocs(ref);
+        var listLayanan = [];
+
+        snap.docs.map((doc) => {
+          listLayanan.push(doc.data());
+        })
+        data["legalDocs"] = listLayanan;
+
       } else {
         const docRef = doc(db, "lawFirms", document.id);
         const docSnap = await getDoc(docRef);

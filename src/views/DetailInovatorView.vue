@@ -40,11 +40,7 @@
           <div class="gray700--text">{{ data["data"]["description"] }}</div>
         </v-col>
         <v-col>
-          <v-btn
-            elevation="0"
-            color="primary"
-            class="pa-6"
-            style="width: 100%"
+          <v-btn elevation="0" color="primary" class="pa-6" style="width: 100%"
             >Kirim Pesan</v-btn
           >
           <br />
@@ -132,6 +128,26 @@
           <div>{{ data["data"]["fundingType"] }}</div>
         </v-col>
       </v-row>
+
+      <div class="mt-8">
+        <h2 class="mb-4">Dokumen</h2>
+        <v-row>
+          <v-col v-for="data in documents" :key="data.text" cols="6">
+            <DocumentCardComponent :data="data"/>
+          </v-col>
+        </v-row>
+      </div>
+
+      <div class="mt-8">
+        <h2 class="mb-4">Dokumen Legal</h2>
+        <v-row v-if="data['legalDocs'].length > 0">
+          <v-col v-for="data in data['legalDocs']" :key="data.text" cols="6">
+            <DocumentCardComponent :data="data"/>
+          </v-col>
+        </v-row>
+        <div v-else>Belum ada dokumen legal yang di-upload</div>
+      </div>
+
     </v-container>
   </div>
 </template>
@@ -139,11 +155,16 @@
 <script>
 import { EventBus } from "../event-bus";
 import { getDataByUsername } from "../db/dataRepository.js";
+import DocumentCardComponent from '@/components/Detail/DocumentCardComponent.vue';
 
 export default {
   name: "DetailInovatorView",
+  components: {
+    DocumentCardComponent
+  },
   data: () => ({
     data: {},
+    documents: [],
     about: [
       {
         icon: "ic-location.svg",
@@ -182,13 +203,36 @@ export default {
       this.about[0]["text"] = this.data["data"]["address"];
       this.about[1]["text"] = this.data["data"]["totalInvestor"];
       this.about[2]["text"] = this.data["data"]["websiteUrl"];
+
+      const name = this.data["name"];
+      this.documents = [
+        {
+          title: "Proposal Bisnis",
+          text: "Proposal " + name,
+          url: this.data["data"]["proposalUrl"],
+        },
+        {
+          title: "Pitch Deck",
+          text: "Pitch Deck " + name,
+          url: this.data["data"]["pitchDeckUrl"],
+        },
+        {
+          title: "Demo Produk",
+          text: "Demo Produk " + name,
+          url: this.data["data"]["productDemoUrl"],
+        },
+        {
+          title: "Business Model Canvas",
+          text: "BMC " + name,
+          url: this.data["data"]["bmcUrl"],
+        },
+      ];
     } catch (e) {
       EventBus.$emit("showSnackbar", e, false);
     }
     EventBus.$emit("stopLoading");
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
