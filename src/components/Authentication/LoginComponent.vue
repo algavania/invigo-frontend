@@ -36,7 +36,7 @@
                   class="pa-10 d-flex align-center hover-pointer"
                   style="width: fit-content"
                 >
-                  <v-icon icon="mdi-close" size="large" color="white" />
+                  <v-icon large color="white">mdi-close</v-icon>
                   <p
                     class="label-size font-weight-medium white--text ml-3 mb-1"
                   >
@@ -64,21 +64,21 @@
                       label="Email"
                       type="email"
                       v-model="email"
-                      variant="outlined"
+                      outlined
                       :rules="emailRules"
-                      density="compact"
+                      dense
                     />
                     <v-text-field
-                      :append-inner-icon="
+                      :append-icon="
                         isPasswordObscure ? 'mdi-eye-off' : 'mdi-eye'
                       "
                       :type="isPasswordObscure ? 'password' : 'text'"
-                      density="compact"
+                      dense
                       label="Kata Sandi"
                       :rules="passwordRules"
                       v-model="password"
-                      variant="outlined"
-                      @click:append-inner="
+                      outlined
+                      @click:append="
                         isPasswordObscure = !isPasswordObscure
                       "
                     />

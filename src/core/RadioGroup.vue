@@ -1,7 +1,7 @@
 <template>
     <div v-if="isColumn">
         <v-radio-group :v-model="groupModel" inline>
-            <div class="pt-1 pb-0 px-2 my-1 radio-container rounded-lg w-100 my-0" v-for="radioValue in values"
+            <div class="py-1 px-4 my-1 radio-container rounded-lg w-100 my-0" v-for="radioValue in values"
                 :key="radioValue">
                 <v-radio :value="radioValue" color="primary" class="py-3">
                     <template v-slot:label>
@@ -13,7 +13,7 @@
     </div>
     <div v-else>
         <v-radio-group :v-model="groupModel" inline>
-            <div class="pt-1 pb-0 px-2 my-1 radio-container rounded-lg w-100 my-0" v-for="radioValue in values"
+            <div class="py-1 px-4 my-1 radio-container rounded-lg w-100 my-0" v-for="radioValue in values"
                 :key="radioValue">
                 <v-radio :value="radioValue" color="primary" class="py-3">
                     <template v-slot:label>

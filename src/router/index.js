@@ -7,6 +7,10 @@ import DetailInovatorView from "../views/DetailInovatorView.vue";
 import DetailFirmView from "../views/DetailFirmView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import ChatView from "../views/ChatView.vue";
+import NotificationView from "../views/NotificationView.vue";
+import InovatorProfileView from "../views/InovatorProfileView.vue";
+import InvestorProfileView from "../views/InvestorProfileView.vue";
+import FirmProfileView from "../views/FirmProfileView.vue";
 import VueRouter from "vue-router";
 import auth from "../middlewares/auth";
 import notInovator from "../middlewares/not-inovator";
@@ -47,6 +51,38 @@ const router = new VueRouter({
       path: "/chat",
       name: "chat",
       component: ChatView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/notification",
+      name: "notification",
+      component: NotificationView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/inovator-profile",
+      name: "inovatorProfile",
+      component: InovatorProfileView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/investor-profile",
+      name: "investorProfile",
+      component: InvestorProfileView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/firm-profile",
+      name: "firmProfile",
+      component: FirmProfileView,
       meta: {
         middleware: [auth],
       },

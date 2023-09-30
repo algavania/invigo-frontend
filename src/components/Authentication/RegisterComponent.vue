@@ -34,14 +34,14 @@
                   class="pa-10 d-flex align-center hover-pointer"
                   style="width: fit-content"
                 >
-                  <v-icon icon="mdi-close" size="large" color="white" />
+                  <v-icon large color="white">mdi-close</v-icon>
                   <p
                     class="label-size font-weight-medium white--text ml-3 mb-1"
                   >
                     Tutup
                   </p>
                 </div>
-                <div class="h-100 w-100 d-flex align-end justify-end">
+                <div class="w-100 d-flex align-end justify-end" style="height: 100%;">
                   <img
                     :src="require('@/assets/bg-login.svg')"
                     alt="Background"
@@ -51,7 +51,7 @@
               </div>
             </v-col>
             <v-col cols="6">
-              <div class="py-10 px-12 h-100" style="position: relative">
+              <div class="py-10 px-12" style="position: relative; height: 100%;">
                 <p class="label-size font-weight-medium">Buat Akun Baru</p>
                 <div class="slate200 step-indicator d-flex mt-6 mb-8">
                   <div
@@ -96,10 +96,11 @@
                   </p>
                   <v-btn
                     @click="currentStep++"
-                    class="mt-16 mb-3 w-100"
+                    class="mt-16 mb-3"
                     color="primary"
                     height="50"
                     elevation="0"
+                    style="width: 100%;"
                     >Buat Akun</v-btn
                   >
                   <LoginComponent :isTextButton="false" />
@@ -112,35 +113,35 @@
                       v-model="name"
                       :rules="requiredRules"
                       label="Nama"
-                      variant="outlined"
-                      density="compact"
+                      outlined
+                      dense
                     />
                     <v-text-field
                       v-model="email"
                       :rules="emailRules"
                       type="email"
                       label="Email"
-                      variant="outlined"
-                      density="compact"
+                      outlined
+                      dense
                     />
                     <v-text-field
                       label="Nama Pengguna"
-                      variant="outlined"
-                      density="compact"
+                      outlined
+                      dense
                     />
                     <v-row>
                       <v-col cols="6">
                         <v-text-field
                           v-model="password"
-                          :append-inner-icon="
+                          :append-icon="
                             isPasswordObscure ? 'mdi-eye-off' : 'mdi-eye'
                           "
                           :type="isPasswordObscure ? 'password' : 'text'"
                           :rules="passwordRules"
-                          density="compact"
+                          dense
                           label="Kata Sandi"
-                          variant="outlined"
-                          @click:append-inner="
+                          outlined
+                          @click:append="
                             isPasswordObscure = !isPasswordObscure
                           "
                         />
@@ -149,14 +150,14 @@
                         <v-text-field
                           v-model="confirmPassword"
                           :rules="confirmPasswordRules"
-                          :append-inner-icon="
+                          :append-icon="
                             isConfirmObscure ? 'mdi-eye-off' : 'mdi-eye'
                           "
                           :type="isConfirmObscure ? 'password' : 'text'"
-                          density="compact"
+                          dense
                           label="Konfirmasi"
-                          variant="outlined"
-                          @click:append-inner="
+                          outlined
+                          @click:append="
                             isConfirmObscure = !isConfirmObscure
                           "
                         />
@@ -181,12 +182,13 @@
                     color="primary"
                     height="50"
                     elevation="0"
+                    style="width: 100%;"
                     >Buat Akun</v-btn
                   >
                   <LoginComponent :isTextButton="false" />
                 </div>
 
-                <div v-else style="position: relative" class="h-100">
+                <div v-else style="position: relative; height: 100%">
                   <p class="small-body-size mb-5">Sukses Membuat Akun.</p>
                   <p class="small-body-size mb-2">
                     Silakan cek email
@@ -201,7 +203,7 @@
                     color="primary"
                     height="50"
                     elevation="0"
-                    style="position: absolute; bottom: 5rem"
+                    style="position: absolute; bottom: 5rem; width: 100%;"
                     >Buat Akun</v-btn
                   >
                 </div>
