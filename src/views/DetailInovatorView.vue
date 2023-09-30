@@ -40,10 +40,10 @@
           <div class="gray700--text">{{ data["data"]["description"] }}</div>
         </v-col>
         <v-col>
-          <v-btn elevation="0" color="primary" class="pa-6" style="width: 100%"
+          <v-btn v-if="data['username'] != user['username']" elevation="0" color="primary" class="pa-6" style="width: 100%"
             >Kirim Pesan</v-btn
           >
-          <br />
+          <br v-if="data['username'] != user['username']" />
           <v-btn elevation="0" outlined class="pa-6 mt-4" style="width: 100%">
             <v-icon left dark> mdi-share-variant </v-icon>
 
@@ -129,7 +129,7 @@
         </v-col>
       </v-row>
 
-      <div class="mt-8">
+      <div class="mt-8" v-if="data['role'] != 'Law Firm'">
         <h2 class="mb-4">Dokumen</h2>
         <v-row>
           <v-col v-for="data in documents" :key="data.text" cols="6">
@@ -193,10 +193,12 @@ export default {
         disabled: false,
       },
     ],
+    user: {},
   }),
   async mounted() {
     EventBus.$emit("startLoading");
     try {
+      this.user = JSON.parse(localStorage.getItem('user'));
       this.data = await getDataByUsername(this.$route.params.username);
       this.items[2]["text"] = this.data["name"];
 

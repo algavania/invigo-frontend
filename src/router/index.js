@@ -9,6 +9,7 @@ import ProfileView from "../views/ProfileView.vue";
 import ChatView from "../views/ChatView.vue";
 import VueRouter from "vue-router";
 import auth from "../middlewares/auth";
+import notInovator from "../middlewares/not-inovator";
 
 Vue.use(VueRouter);
 
@@ -71,7 +72,7 @@ const router = new VueRouter({
       name: "detailInovator",
       component: DetailInovatorView,
       meta: {
-        middleware: [auth],
+        middleware: [auth, notInovator],
       },
     },
     {

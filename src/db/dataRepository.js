@@ -125,7 +125,6 @@ async function getDataByUsername(username) {
   const q = query(ref, where("username", "==", username));
   const querySnapshot = await getDocs(q);
   var list = [];
-  console.log("testing abc 1");
   await Promise.all(
     querySnapshot.docs.map(async (document) => {
       var data = document.data();
@@ -196,9 +195,8 @@ async function getDataByUsername(username) {
 
         snap.docs.map((doc) => {
           listLayanan.push(doc.data());
-        })
+        });
         data["legalDocs"] = listLayanan;
-
       } else {
         const docRef = doc(db, "lawFirms", document.id);
         const docSnap = await getDoc(docRef);
@@ -210,7 +208,7 @@ async function getDataByUsername(username) {
 
         snap.docs.map((doc) => {
           listLayanan.push(doc.data());
-        })
+        });
         data["listLayanan"] = listLayanan;
       }
       list.push(data);
@@ -222,4 +220,10 @@ async function getDataByUsername(username) {
     return list[0];
   }
 }
-export { getInvestors, getLawFirms, getInnovators, getDataByUsername };
+
+export {
+  getInvestors,
+  getLawFirms,
+  getInnovators,
+  getDataByUsername,
+};
