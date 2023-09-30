@@ -101,7 +101,7 @@
                                     </div>
                                 </v-card-text>
 
-                                <v-card-actions v-if="uploadType != ''">
+                                <v-card-actions>
                                     <v-btn color="primary" height="50" elevation="0" class="flex-grow-1 mb-2"
                                         style="width: 100%;">
                                         Tambah
@@ -110,7 +110,12 @@
                             </v-card>
                         </v-dialog>
                     </div>
-                    <div class="d-flex mt-6" style="gap: 1rem;">
+
+                    <div v-for="doc in legalDocuments" :key="doc">
+                        <LegalDocumentComponent :data="doc" />
+                    </div>
+
+                    <div class="d-flex mt-10" style="gap: 1rem;">
                         <v-btn color="primary" height="50" elevation="0" class="flex-grow-1">
                             Simpan
                         </v-btn>
@@ -126,15 +131,17 @@
 
 <script>
 import FileUploadComponent from "../components/Common/FileUploadComponent.vue"
+import LegalDocumentComponent from "../components/Profile/LegalDocumentComponent.vue";
 
 export default {
     name: "InovatorProfileView",
     components: {
         FileUploadComponent,
+        LegalDocumentComponent,
     },
     data: () => ({
         dialog: false,
-        uploadType: "",
+        uploadType: "Dokumen",
         items: [
             {
                 text: "Beranda",
@@ -143,6 +150,16 @@ export default {
             {
                 text: "Profil",
                 disabled: false,
+            },
+        ],
+        legalDocuments: [
+        {
+                type: "Document",
+                title: "Nomor Induk Berusaha (NIB)",
+            },
+            {
+                type: "Link",
+                title: "Sertifikat Indikasi Geografis",
             },
         ],
         isPublic: true,
