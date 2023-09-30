@@ -100,7 +100,7 @@
 
                                 <v-card-actions v-if="uploadType != ''">
                                     <v-btn color="primary" height="50" elevation="0" class="flex-grow-1 mb-2" style="width: 100%;">
-                                        Simpan
+                                        Tambah
                                     </v-btn>
                                 </v-card-actions>
                             </v-card>
