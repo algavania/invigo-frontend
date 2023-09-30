@@ -11,6 +11,9 @@ import NotificationView from "../views/NotificationView.vue";
 import InovatorProfileView from "../views/InovatorProfileView.vue";
 import InvestorProfileView from "../views/InvestorProfileView.vue";
 import FirmProfileView from "../views/FirmProfileView.vue";
+import InovatorsView from "../views/InovatorsView.vue";
+import InvestorsView from "../views/InvestorsView.vue";
+import LawFirmsView from "../views/LawFirmsView.vue";
 import VueRouter from "vue-router";
 import auth from "../middlewares/auth";
 import notInovator from "../middlewares/not-inovator";
@@ -35,6 +38,30 @@ const router = new VueRouter({
       path: "/dashboard",
       name: "dashboard",
       component: DashboardView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/innovators",
+      name: "innovators",
+      component: InovatorsView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/investors",
+      name: "investors",
+      component: InvestorsView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/law-firms",
+      name: "lawFirms",
+      component: LawFirmsView,
       meta: {
         middleware: [auth],
       },
