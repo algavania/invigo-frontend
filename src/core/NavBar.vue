@@ -47,6 +47,16 @@
                     </div>
                   </template>
                   <v-list>
+                    <v-list-item v-if="userRole != 'Law Firm'" class="user-menu hover-pointer">
+                      <v-list-item-title>
+                        <router-link
+                          :to="links.collaborators"
+                          class="black--text"
+                          style="text-decoration: none;">
+                            Kolaborator
+                        </router-link>
+                      </v-list-item-title>
+                    </v-list-item>
                     <v-list-item class="user-menu hover-pointer">
                       <v-list-item-title>
                         <router-link
@@ -57,7 +67,7 @@
                             Profil Saya
                         </router-link>
                         <router-link
-                          v-else-if="userRole == 'Investor'"
+                          v-if="userRole == 'Investor'"
                           :to="links.investorProfile"
                           class="black--text"
                           style="text-decoration: none;">
@@ -124,6 +134,7 @@ export default {
       inovatorProfile: "/inovator-profile",
       investorProfile: "/investor-profile",
       firmProfile: "/firm-profile",
+      collaborators: "/collaborators",
       beforeLogin: [
         { to: "/", text: "Beranda" },
         { to: "/layanan", text: "Layanan" },
