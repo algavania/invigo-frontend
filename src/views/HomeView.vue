@@ -2,7 +2,7 @@
   <div class="gray50 pb-8">
     <v-container>
       <LandingComponent />
-      <FeaturesComponent class="mt-5 mb-16"></FeaturesComponent>
+      <FeaturesComponent class="mt-5 mb-14"></FeaturesComponent>
       <div class="pt-2 pb-12">
         <div v-for="onboarding in onboardings" :key="onboarding.title">
           <OnboardingComponent :title="onboarding.title" :description="onboarding.description" :image="onboarding.image"
@@ -11,8 +11,8 @@
           </OnboardingComponent>
         </div>
       </div>
-      <div class="my-16 bg-orange-gradient rounded-lg d-flex flex-column justify-center align-center text-center"
-        style="height: 22rem; position: relative">
+      <div class="mb-16 bg-orange-gradient rounded-lg d-flex flex-column justify-center align-center text-center"
+        style="height: 20rem; position: relative">
         <h2 class="subheading-size white--text font-weight-bold">
           Mulai kembangkan sekarang
         </h2>
@@ -24,8 +24,6 @@
           :isFilledButton="true"
           :isAccentButton="true"
         ></RegisterComponent>
-        <img :src="require(`@/assets/bg-dashboard.svg`)" alt="Background"
-          style="position: absolute; left: 0; right: 0; margin: auto; height: 100%;" />
       </div>
     </v-container>
   </div>
