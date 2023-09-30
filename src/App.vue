@@ -22,7 +22,7 @@
     </v-dialog>
 
     <NavBar />
-    <router-view></router-view>
+    <router-view class="pt-16 mt-16"></router-view>
     <FooterSection />
     <v-snackbar :color="color" v-model="snackbar" :timeout="timeout">
       {{ text }}

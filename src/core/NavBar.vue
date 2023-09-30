@@ -1,6 +1,6 @@
 <template>
-  <nav class="pa-0" elevation="0">
-    <v-app-bar elevation="0" height="100" color="white" class="pt-1 pb-4">
+  <nav class="pa-0" elevation="0" style="z-index: 100 !important;">
+    <v-app-bar fixed elevation="0" height="100" color="white" class="pt-1 pb-4">
       <v-container>
         <div class="d-flex">
           <v-col style="position: relative;">
