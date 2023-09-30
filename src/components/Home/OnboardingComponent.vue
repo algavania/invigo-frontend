@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isLeft" style="height: 70vh" class="d-flex align-center">
+    <div v-if="isLeft" style="height: 65vh" class="d-flex align-center">
       <v-row align="center">
         <v-col cols="4">
           <h2 class="subheading-size font-weight-medium">

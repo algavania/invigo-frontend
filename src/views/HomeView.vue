@@ -1,5 +1,5 @@
 <template>
-  <div class="gray50">
+  <div class="gray50 pb-8">
     <v-container>
       <LandingComponent />
       <FeaturesComponent class="mt-5 mb-16"></FeaturesComponent>
