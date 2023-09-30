@@ -44,39 +44,20 @@
                       dense
                     />
                     <v-text-field
-                      label="Email"
-                      type="email"
-                      v-model="email"
-                      outlined
-                      dense
-                    />
-                    <v-text-field
                       label="Username"
                       type="text"
                       v-model="username"
                       outlined
                       dense
                     />
-                    <div class="d-flex" style="gap: 1rem;">
-                        <v-text-field
-                            :append-icon="isPasswordObscure ? 'mdi-eye-off' : 'mdi-eye'"
-                            :type="isPasswordObscure ? 'password' : 'text'"
-                            dense
-                            label="Kata Sandi"
-                            v-model="password"
-                            outlined
-                            @click:append="isPasswordObscure = !isPasswordObscure"
-                        />
-                        <v-text-field
-                            :append-icon="isConfirmObscure ? 'mdi-eye-off' : 'mdi-eye'"
-                            :type="isConfirmObscure ? 'password' : 'text'"
-                            dense
-                            label="Konfirmasi"
-                            v-model="confirmPassword"
-                            outlined
-                            @click:append="isConfirmObscure = !isConfirmObscure"
-                        />
-                    </div>
+                    <v-text-field
+                      label="Email"
+                      type="email"
+                      v-model="email"
+                      outlined
+                      dense
+                      disabled
+                    />
 
                     <h6 class="label-size font-weight-bold my-5">
                         Tentang
@@ -136,6 +117,21 @@
                         multiple
                     />
 
+                    <h6 class="label-size font-weight-bold my-5">
+                        Inovasi Saya
+                    </h6>
+                    <v-text-field
+                      label="Deskripsi"
+                      type="text"
+                      v-model="inovationDescription"
+                      outlined
+                      dense
+                    />
+                    <FileUploadComponent label="Proposal" description="Dokumen PDF dengan ukuran maksimal 5mb." />
+                    <FileUploadComponent label="Pitch Deck" description="Dokumen PDF dengan ukuran maksimal 5mb." />
+                    <FileUploadComponent label="Business Modal Canvas" description="Dokumen PDF dengan ukuran maksimal 5mb." />
+                    <FileUploadComponent label="Demo Produk" description="" />
+
                     <div class="d-flex mt-6" style="gap: 1rem;">
                         <v-btn color="primary" height="50" elevation="0" class="flex-grow-1">
                             Simpan
@@ -151,8 +147,13 @@
 </template>
 
 <script>
+import FileUploadComponent from "../components/Common/FileUploadComponent.vue"
+
 export default {
     name: "InovatorProfileView",
+    components: {
+        FileUploadComponent
+    },
     data: () => ({
         items: [
             {
@@ -165,8 +166,6 @@ export default {
             },
         ],
         isPublic: true,
-        isPasswordObscure: true,
-        isConfirmObscure: true,
     })
 }
 </script>
