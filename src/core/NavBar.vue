@@ -52,21 +52,21 @@
                           :to="links.inovatorProfile"
                           class="black--text"
                           style="text-decoration: none;">
-                            Profil
+                            Profil Saya
                         </router-link>
                         <router-link
                           v-else-if="userRole == 'Investor'"
                           :to="links.investorProfile"
                           class="black--text"
                           style="text-decoration: none;">
-                            Profil
+                            Profil Saya
                         </router-link>
                         <router-link
                           v-if="userRole == 'Law Firm'"
                           :to="links.firmProfile"
                           class="black--text"
                           style="text-decoration: none;">
-                            Profil
+                            Profil Saya
                         </router-link>
                       </v-list-item-title>
                     </v-list-item>

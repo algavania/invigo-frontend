@@ -70,9 +70,9 @@
                       dense
                     />
                     <v-text-field
-                      label="Jumlah Inovasi"
+                      label="Jumlah Investasi"
                       type="text"
-                      v-model="investorAmount"
+                      v-model="investationAmount"
                       outlined
                       dense
                     />
@@ -94,7 +94,7 @@
                     <v-text-field
                       label="Penemu"
                       type="text"
-                      v-model="ceo"
+                      v-model="founder"
                       outlined
                       dense
                     />

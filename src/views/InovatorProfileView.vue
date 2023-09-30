@@ -94,7 +94,7 @@
                     <v-text-field
                       label="Penemu"
                       type="text"
-                      v-model="ceo"
+                      v-model="founder"
                       outlined
                       dense
                     />
