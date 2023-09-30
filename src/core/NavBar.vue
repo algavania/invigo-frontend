@@ -1,5 +1,5 @@
 <template>
-  <nav class="pa-0" elevation="0" style="z-index: 100 !important;">
+  <nav class="pa-0" elevation="0" style="z-index: 99 !important;">
     <v-app-bar fixed elevation="0" height="100" color="white" class="pt-1 pb-4">
       <v-container>
         <div class="d-flex">
@@ -35,7 +35,7 @@
                   </div>
                 </div>
 
-                <v-menu offset-y>
+                <v-menu offset-y style="z-index: 100 !important;">
                   <template v-slot:activator="{ on, attrs }">
                     <div class="d-flex align-center ml-10 hover-pointer" v-bind="attrs" v-on="on">
                       <div class="user-profile-picture"></div>
@@ -134,7 +134,7 @@ export default {
       inovatorProfile: "/inovator-profile",
       investorProfile: "/investor-profile",
       firmProfile: "/firm-profile",
-      collaborators: "/collaborators",
+      collaborators: "/future-development",
       beforeLogin: [
         { to: "/", text: "Beranda" },
         { to: "/layanan", text: "Layanan" },

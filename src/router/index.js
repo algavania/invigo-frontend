@@ -14,7 +14,8 @@ import FirmProfileView from "../views/FirmProfileView.vue";
 import InovatorsView from "../views/InovatorsView.vue";
 import InvestorsView from "../views/InvestorsView.vue";
 import LawFirmsView from "../views/LawFirmsView.vue";
-import CollaboratorsView from "../views/CollaboratorsView.vue";
+import FutureDevelopmentView from "../views/FutureDevelopmentView.vue"
+// import CollaboratorsView from "../views/CollaboratorsView.vue";
 import VueRouter from "vue-router";
 import auth from "../middlewares/auth";
 import notInovator from "../middlewares/not-inovator";
@@ -116,13 +117,18 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/collaborators",
-      name: "collaborators",
-      component: CollaboratorsView,
-      meta: {
-        middleware: [auth],
-      },
+      path: "/future-development",
+      name: "futureDevelopment",
+      component: FutureDevelopmentView,
     },
+    // {
+    //   path: "/collaborators",
+    //   name: "collaborators",
+    //   component: CollaboratorsView,
+    //   meta: {
+    //     middleware: [auth],
+    //   },
+    // },
     {
       path: "/detail/:username",
       name: "detail",
