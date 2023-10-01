@@ -14,6 +14,7 @@ import FirmProfileView from "../views/FirmProfileView.vue";
 import InovatorsView from "../views/InovatorsView.vue";
 import InvestorsView from "../views/InvestorsView.vue";
 import LawFirmsView from "../views/LawFirmsView.vue";
+import PrivacyPolicyView from "../views/PrivacyPolicyView.vue";
 import FutureDevelopmentView from "../views/FutureDevelopmentView.vue"
 import PageNotFoundView from "../views/PageNotFoundView.vue"
 // import CollaboratorsView from "../views/CollaboratorsView.vue";
@@ -121,6 +122,11 @@ const router = new VueRouter({
       path: "/future-development",
       name: "futureDevelopment",
       component: FutureDevelopmentView,
+    },
+    {
+      path: "/privacy-policy",
+      name: "privacyPolicy",
+      component: PrivacyPolicyView,
     },
     // {
     //   path: "/collaborators",
