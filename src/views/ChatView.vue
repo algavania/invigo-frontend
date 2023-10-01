@@ -89,13 +89,17 @@
                             v-on="on"
                           >
                             {{ msg.message }}
-                            <v-icon v-if="hover && msg.sender == uid" small>mdi-delete</v-icon>
+                            <v-icon v-if="hover && msg.sender == uid" small
+                              >mdi-delete</v-icon
+                            >
                           </v-chip>
                         </v-hover>
                       </template>
                       <v-list v-if="msg.sender == uid">
-                        <v-list-item>
-                          <v-list-item-title @click="deleteMessage(msg)">Hapus</v-list-item-title>
+                        <v-list-item style="cursor: pointer">
+                          <v-list-item-title @click="deleteMessage(msg)"
+                            >Hapus</v-list-item-title
+                          >
                         </v-list-item>
                       </v-list>
                     </v-menu>
@@ -135,7 +139,7 @@ import {
   query,
   onSnapshot,
   orderBy,
-  where
+  where,
 } from "firebase/firestore";
 
 import {
@@ -144,6 +148,7 @@ import {
   getInnovators,
 } from "../db/dataRepository.js";
 import { getChatroom, sendChat, deleteMessage } from "../db/chatRepository.js";
+import { isPitchingExist } from "../db/pitchingRepository.js";
 import { firebase } from "../db/firebaseInit.js";
 const db = getFirestore(firebase);
 
@@ -171,6 +176,7 @@ export default {
     data1: [],
     data2: [],
     afterMounted: false,
+    user: {},
   }),
   watch: {
     tab() {
@@ -183,7 +189,11 @@ export default {
   methods: {
     listenToRealtimeData(id) {
       if (id) {
-        const q = query(collection(db, "chatRooms", id, "chats"), where('deletedAt', '==', null), orderBy('createdAt'));
+        const q = query(
+          collection(db, "chatRooms", id, "chats"),
+          where("deletedAt", "==", null),
+          orderBy("createdAt")
+        );
         onSnapshot(q, (snapshot) => {
           this.messages = snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -201,7 +211,17 @@ export default {
           var data;
           switch (this.tabs[this.tab]) {
             case "Investor":
+              var isExist = false;
               data = this.investors[this.selectedItem];
+              if (this.user["role"] == "Inovator" && this.selectedItem != 1) {
+                  isExist = await isPitchingExist(
+                    this.selectedItem["uid"],
+                    this.user["uid"]
+                  );
+                  if (!isExist && this.selectedItem != 1)
+                    throw "Anda belum melakukan pitching ke investor ini.";
+                }
+              console.log('is exist', isExist);
               break;
             case "Jasa Legalitas":
               data = this.lawFirms[this.selectedItem];
@@ -218,25 +238,26 @@ export default {
           }
           this.listenToRealtimeData(this.chatroomData["id"]);
         } catch (e) {
+          console.log(e);
           EventBus.$emit("showSnackbar", e, false);
         }
         EventBus.$emit("stopLoading");
       }
     },
     addReply() {
-      if (this.tfSend && this.selectedItem != 1) {
-        sendChat(this.currentData['uid'], this.tfSend).then((v) => {
-        if (v) {
-          this.messages = [];
-          this.getChatroomData();
-        }
-      });
-      this.tfSend = "";
+      if (this.tfSend && this.selectedItem != 1 && this.chatroomData['uid']) {
+        sendChat(this.currentData["uid"], this.tfSend).then((v) => {
+          if (v) {
+            this.messages = [];
+            this.getChatroomData();
+          }
+        });
+        this.tfSend = "";
       }
     },
     deleteMessage(msg) {
       if (msg.sender == this.uid) {
-        deleteMessage(this.chatroomData['id'], msg.id);
+        deleteMessage(this.chatroomData["id"], msg.id);
       }
     },
   },
@@ -244,6 +265,7 @@ export default {
     EventBus.$emit("startLoading");
     try {
       this.role = JSON.parse(localStorage.user);
+      this.user = JSON.parse(localStorage.user);
       this.uid = this.role["uid"];
       this.role = this.role["role"];
 

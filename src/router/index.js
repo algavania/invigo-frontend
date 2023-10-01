@@ -17,6 +17,9 @@ import LawFirmsView from "../views/LawFirmsView.vue";
 import VueRouter from "vue-router";
 import auth from "../middlewares/auth";
 import notInovator from "../middlewares/not-inovator";
+import onlyInovator from "../middlewares/only-inovator";
+import onlyInvestor from "../middlewares/only-investor";
+import onlyLawFirm from "../middlewares/only-firm";
 
 Vue.use(VueRouter);
 
@@ -95,7 +98,7 @@ const router = new VueRouter({
       name: "inovatorProfile",
       component: InovatorProfileView,
       meta: {
-        middleware: [auth],
+        middleware: [auth, onlyInovator],
       },
     },
     {
@@ -103,7 +106,7 @@ const router = new VueRouter({
       name: "investorProfile",
       component: InvestorProfileView,
       meta: {
-        middleware: [auth],
+        middleware: [auth, onlyInvestor],
       },
     },
     {
@@ -111,7 +114,7 @@ const router = new VueRouter({
       name: "firmProfile",
       component: FirmProfileView,
       meta: {
-        middleware: [auth],
+        middleware: [auth, onlyLawFirm],
       },
     },
     {
