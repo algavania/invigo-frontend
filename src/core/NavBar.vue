@@ -195,17 +195,24 @@ export default {
   }),
   methods: {
     redirectToProfile() {
-      if (this.userRole == "Inovator") this.$router.push("/inovator-profile");
-      else if (this.userRole == "Investor") this.$router.push("/investor-profile");
-      else if (this.userRole == "Firm") this.$router.push("/firm-profile");
+      if (this.userRole == "Inovator") {
+        if (this.$route.path != "/inovator-profile") this.$router.push("/inovator-profile")
+      }
+      else if (this.userRole == "Investor") {
+        console.log('asd')
+        if (this.$route.path != "/investor-profile") this.$router.push("/investor-profile")
+      }
+      else if (this.userRole == "Law Firm") {
+        if (this.$route.path != "/firm-profile") this.$router.push("/firm-profile");
+      }
     },
     redirectToSubscription() {
-      this.$router.push("/berlangganan");
+      if (this.$route.path != "/berlangganan") this.$router.push("/berlangganan");
     },
     logout() {
       localStorage.clear();
       EventBus.$emit("triggerCheckLoginToken");
-      this.$router.push("/");
+      if (this.$route.path != "/") this.$router.push("/");
     },
     checkLoginToken() {
       this.hasLogin = localStorage.getItem("user") != null;
