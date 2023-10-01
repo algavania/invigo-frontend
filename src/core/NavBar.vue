@@ -72,7 +72,7 @@
                   </div>
                 </div>
 
-                <v-menu offset-y style="z-index: 101!important;">
+                <v-menu offset-y style="z-index: 101 !important">
                   <template v-slot:activator="{ on, attrs }">
                     <div
                       class="d-flex align-center ml-10 hover-pointer"
@@ -90,10 +90,11 @@
                     </div>
                   </template>
                   <v-list>
-                    <v-list-item class="user-menu hover-pointer" @click="redirectToProfile()">
-                      <v-list-item-title>
-                        Profil Saya
-                      </v-list-item-title>
+                    <v-list-item
+                      class="user-menu hover-pointer"
+                      @click="redirectToProfile()"
+                    >
+                      <v-list-item-title> Profil Saya </v-list-item-title>
                     </v-list-item>
                     <v-list-item class="user-menu hover-pointer" @click="redirectToSubscription()">
                       <v-list-item-title>
@@ -196,18 +197,18 @@ export default {
   methods: {
     redirectToProfile() {
       if (this.userRole == "Inovator") {
-        if (this.$route.path != "/inovator-profile") this.$router.push("/inovator-profile")
+        if (this.$route.name != "inovatorProfile") {
+          this.$router.push("/inovator-profile");
+        }
+      } else if (this.userRole == "Investor") {
+        if (this.$route.name != "investorProfile") {
+          this.$router.push("/investor-profile");
+        }
+      } else if (this.userRole == "Law Firm") {
+        if (this.$route.name != "firmProfile") {
+          this.$router.push("/firm-profile");
+        }
       }
-      else if (this.userRole == "Investor") {
-        console.log('asd')
-        if (this.$route.path != "/investor-profile") this.$router.push("/investor-profile")
-      }
-      else if (this.userRole == "Law Firm") {
-        if (this.$route.path != "/firm-profile") this.$router.push("/firm-profile");
-      }
-    },
-    redirectToSubscription() {
-      if (this.$route.path != "/berlangganan") this.$router.push("/berlangganan");
     },
     logout() {
       localStorage.clear();

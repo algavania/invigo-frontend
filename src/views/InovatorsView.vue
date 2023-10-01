@@ -18,7 +18,7 @@
           <h6 class="label-size font-weight-bold mb-2">
               Rekomendasi Inovator
           </h6>
-          <p class="gray700--text">Saran inovator yang sesuai dengan industri bisnis kamu.</p>
+          <p class="gray700--text">Saran inovator yang sesuai dengan industri bisnis Anda.</p>
 
           <v-row class="mt-4">
               <v-col cols="3" v-for="data in inovators" :key="data.uid">

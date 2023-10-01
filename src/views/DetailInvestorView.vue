@@ -63,7 +63,7 @@
             <br />
           </div>
 
-          <v-btn elevation="0" outlined class="pa-6 mt-4" style="width: 100%">
+          <v-btn @click="copyUrl()" elevation="0" outlined class="pa-6 mt-4" style="width: 100%">
             <v-icon left dark> mdi-share-variant </v-icon>
 
             Bagikan</v-btn
@@ -199,6 +199,10 @@ export default {
     ],
   }),
   methods: {
+    copyUrl() {
+      navigator.clipboard.writeText(window.location.href);
+      EventBus.$emit("showSnackbar", "Berhasil menyalin link", true);
+    },
     async sendPitching() {
       EventBus.$emit("startLoading");
       try {

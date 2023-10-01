@@ -72,7 +72,7 @@
             >
           </div>
           <br v-if="data['username'] != user['username'] && user['role'] != 'Investor'" />
-          <v-btn elevation="0" outlined class="pa-6 mt-4" style="width: 100%">
+          <v-btn @click="copyUrl()" elevation="0" outlined class="pa-6 mt-4" style="width: 100%">
             <v-icon left dark> mdi-share-variant </v-icon>
 
             Bagikan</v-btn
@@ -235,6 +235,10 @@ export default {
     this.refreshPage();
   },
   methods: {
+    copyUrl() {
+      navigator.clipboard.writeText(window.location.href);
+      EventBus.$emit("showSnackbar", "Berhasil menyalin link", true);
+    },
     async updatePitching(status) {
       EventBus.$emit("startLoading");
       try {

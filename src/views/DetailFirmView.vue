@@ -44,7 +44,7 @@
             >Kirim Pesan</v-btn
           >
           <br />
-          <v-btn elevation="0" outlined class="pa-6 mt-4" style="width: 100%">
+          <v-btn elevation="0" outlined class="pa-6 mt-4" @click="copyUrl()" style="width: 100%">
             <v-icon left dark> mdi-share-variant </v-icon>
 
             Bagikan</v-btn
@@ -163,7 +163,12 @@ export default {
     }
     EventBus.$emit("stopLoading");
   },
-  methods: {},
+  methods: {
+    copyUrl() {
+      navigator.clipboard.writeText(window.location.href);
+      EventBus.$emit("showSnackbar", "Berhasil menyalin link", true);
+    }
+  },
 };
 </script>
 
