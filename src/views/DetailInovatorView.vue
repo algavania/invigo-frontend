@@ -4,9 +4,10 @@
       <v-row>
         <v-col cols="3">
           <div
-            class="w-100 primary"
             style="min-height: 15rem; height: 100%"
-          ></div>
+          >
+          <img :src="data['photoUrl']" alt="Photo" width="100%" height="100%" style="object-fit: contain;" class="pa-4">
+        </div>
         </v-col>
         <v-col cols="7">
           <v-breadcrumbs :items="items" class="ma-0 pa-0 mb-4">

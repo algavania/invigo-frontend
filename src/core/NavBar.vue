@@ -79,7 +79,9 @@
                       v-bind="attrs"
                       v-on="on"
                     >
-                      <div class="user-profile-picture"></div>
+                      <div>
+                        <img :src="userPhoto" alt="Profile Picture" width="100%" height="100%" class="user-profile-picture">
+                      </div>
                       <div class="mx-2">
                         <p class="ma-0 font-weight-medium">{{ displayName }}</p>
                         <p class="small-body-size gray700--text ma-0">
@@ -193,6 +195,7 @@ export default {
     displayName: "",
     userName: "",
     userRole: "",
+    userPhoto: "",
   }),
   methods: {
     redirectToProfile() {
@@ -225,7 +228,7 @@ export default {
         let user = JSON.parse(localStorage.getItem("user"));
         this.displayName = user.name;
         this.userName = user.username;
-        this.userRole = user.role;
+        this.userPhoto = user.photoUrl;
       }
     },
   },
@@ -262,7 +265,7 @@ export default {
 .user-profile-picture {
   width: 3rem;
   height: 3rem;
-  background-color: #064e3b;
+  border: 1px solid #374151;
   border-radius: 100%;
 }
 
