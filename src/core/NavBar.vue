@@ -171,7 +171,7 @@ export default {
       collaborators: "/collaborators",
       beforeLogin: [
         { to: "/", text: "Beranda" },
-        { to: "/layanan", text: "Layanan" },
+        // { to: "/layanan", text: "Layanan" },
         { to: "/berlangganan", text: "Berlangganan" },
         { to: "/masuk", text: "Masuk" },
         { to: "/coba-sekarang", text: "Coba Sekarang" },
