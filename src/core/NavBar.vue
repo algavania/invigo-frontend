@@ -79,8 +79,8 @@
                       v-bind="attrs"
                       v-on="on"
                     >
-                      <div>
-                        <img :src="userPhoto" alt="Profile Picture" width="100%" height="100%" class="user-profile-picture">
+                      <div class="user-profile-picture">
+                        <img :src="userPhoto" alt="Profile Picture" width="100%" height="100%" class="pa-1" style="object-fit: contain;">
                       </div>
                       <div class="mx-2">
                         <p class="ma-0 font-weight-medium">{{ displayName }}</p>
@@ -265,8 +265,10 @@ export default {
 .user-profile-picture {
   width: 3rem;
   height: 3rem;
-  border: 1px solid #374151;
   border-radius: 100%;
+  background: white;
+  object-fit: contain;
+  border: 1px rgba(0, 0, 0, 0.3) solid;
 }
 
 .user-menu:hover {
