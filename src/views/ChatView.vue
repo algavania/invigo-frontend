@@ -11,7 +11,7 @@
           <v-responsive class="overflow-y-auto fill-height">
             <v-sheet style="border-radius: 12px" class="pa-4">
               <div class="d-flex align-center">
-                <v-avatar color="grey darken-1" size="50"></v-avatar>
+                <img :src="user.photoUrl" color="grey darken-1" style="width: 50px; height: 50px; border-radius: 100%; border: 1px rgba(0, 0, 0, 0.3) solid; object-fit: contain;">
                 <div class="font-weight-medium ml-4">Pesan</div>
               </div>
             </v-sheet>
@@ -30,7 +30,8 @@
                   <v-list-item-group v-model="selectedItem">
                     <template v-for="(item, index) in data1">
                       <v-list-item :key="`parent${index}`" :value="item">
-                        <v-list-item-avatar color="primary">
+                        <v-list-item-avatar>
+                          <img :src="item.userData.photoUrl" alt="Profile Picture" style="width: 100%; height: 100%; border-radius: 100%; border: 1px rgba(0, 0, 0, 0.3) solid; object-fit: contain;">
                         </v-list-item-avatar>
                         <v-list-item-content>
                           <v-list-item-title class="font-weight-medium">{{
@@ -49,7 +50,8 @@
                   <v-list-item-group v-model="selectedItem">
                     <template v-for="(item, index) in data2">
                       <v-list-item :key="`parent${index}`" :value="item">
-                        <v-list-item-avatar color="primary">
+                        <v-list-item-avatar>
+                          <img :src="item.userData.photoUrl" alt="Profile Picture" style="width: 100%; height: 100%; border-radius: 100%; border: 1px rgba(0, 0, 0, 0.3) solid; object-fit: contain;">
                         </v-list-item-avatar>
                         <v-list-item-content>
                           <v-list-item-title class="font-weight-medium">{{

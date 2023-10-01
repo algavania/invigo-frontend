@@ -1,7 +1,9 @@
 <template>
     <v-card class="w-100 px-8 py-4">
         <div class="d-flex align-center">
-            <div class="profile-picture mr-4"></div>
+            <div class="profile-picture mr-4">
+                <img :src="notification.userData.photoUrl" alt="Profile Picture" width="100%" height="100%" style="border-radius: 100%; border: 1px rgba(0, 0, 0, 0.25) solid; object-fit: contain;">
+            </div>
             <div class="flex-grow-1">
                 <div class="d-flex align-center">
                     <div v-if="notification.tag != 'none'" class="mr-3">
@@ -69,9 +71,8 @@ export default {
 
 <style>
 .profile-picture {
-  width: 3rem;
-  height: 3rem;
-  background-color: #064e3b;
+  width: 3.8rem;
+  height: 3.8rem;
   border-radius: 100%;
 }
 

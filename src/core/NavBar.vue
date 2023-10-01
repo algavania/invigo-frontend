@@ -199,15 +199,12 @@ export default {
   }),
   methods: {
     redirectToProfile() {
-      console.log(`${this.userRole} Investor ${this.userRole == 'Investor'}`);
       if (this.userRole == "Inovator") {
         if (this.$route.name != "inovatorProfile") {
           this.$router.push("/inovator-profile");
         }
       } else if (this.userRole == 'Investor') {
-        console.log('true1');
         if (this.$route.name != "investorProfile") {
-        console.log('true2');
           this.$router.push("/investor-profile");
         }
       } else if (this.userRole == "Law Firm") {
