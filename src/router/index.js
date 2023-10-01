@@ -123,8 +123,13 @@ const router = new VueRouter({
       },
     },
     {
-      path: "/future-development",
-      name: "futureDevelopment",
+      path: "/collaborators",
+      name: "collaborators",
+      component: FutureDevelopmentView,
+    },
+    {
+      path: "/berlangganan",
+      name: "berlangganan",
       component: FutureDevelopmentView,
     },
     {

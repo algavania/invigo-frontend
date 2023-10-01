@@ -168,7 +168,7 @@ export default {
       inovatorProfile: "/inovator-profile",
       investorProfile: "/investor-profile",
       firmProfile: "/firm-profile",
-      collaborators: "/future-development",
+      collaborators: "/collaborators",
       beforeLogin: [
         { to: "/", text: "Beranda" },
         { to: "/layanan", text: "Layanan" },
