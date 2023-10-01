@@ -5,11 +5,10 @@
         <div class="d-flex">
           <v-col style="position: relative;">
             <router-link to="/">
-              <img :src="require('@/assets/logo_letter.png')" alt="Logo" height="70%" class="d-block" style="position: absolute; left: 0; top: 0; bottom: 0; margin: auto;" />
+              <img :src="require('@/assets/logo_letter.png')" alt="Logo" height="50rem" class="d-block" style="position: absolute; left: 0; top: 0; bottom: 0; margin: auto;" />
             </router-link>
           </v-col>
-          <v-spacer></v-spacer>
-          <v-col justify-end align-self="center">
+          <v-col class="flex-grow-1 align-center d-flex justify-end">
             <v-toolbar-items class="toolbar-item" v-if="!hasLogin">
               <div v-for="link in links.beforeLogin" :key="link.to">
                 <v-btn elevation="0" v-if="link.to != '/coba-sekarang' && link.to != '/masuk'" variant="text" text
