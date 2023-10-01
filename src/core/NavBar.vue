@@ -210,6 +210,9 @@ export default {
         }
       }
     },
+    redirectToSubscription() {
+      if (this.$route.name != "/berlangganan") this.$router.push("/berlangganan");
+    },
     logout() {
       localStorage.clear();
       EventBus.$emit("triggerCheckLoginToken");
