@@ -80,7 +80,7 @@
                       v-on="on"
                     >
                       <div class="user-profile-picture">
-                        <img :src="userPhoto" alt="Profile Picture" width="100%" height="100%" class="pa-1" style="object-fit: contain;">
+                        <img :src="userPhoto" alt="Profile Picture" width="100%" height="100%" style="object-fit: contain; border-radius: 100%;">
                       </div>
                       <div class="mx-2">
                         <p class="ma-0 font-weight-medium">{{ displayName }}</p>
@@ -199,12 +199,15 @@ export default {
   }),
   methods: {
     redirectToProfile() {
+      console.log(`${this.userRole} Investor ${this.userRole == 'Investor'}`);
       if (this.userRole == "Inovator") {
         if (this.$route.name != "inovatorProfile") {
           this.$router.push("/inovator-profile");
         }
-      } else if (this.userRole == "Investor") {
+      } else if (this.userRole == 'Investor') {
+        console.log('true1');
         if (this.$route.name != "investorProfile") {
+        console.log('true2');
           this.$router.push("/investor-profile");
         }
       } else if (this.userRole == "Law Firm") {
@@ -226,6 +229,7 @@ export default {
 
       if (this.hasLogin) {
         let user = JSON.parse(localStorage.getItem("user"));
+        this.userRole = user.role;
         this.displayName = user.name;
         this.userName = user.username;
         this.userPhoto = user.photoUrl;
