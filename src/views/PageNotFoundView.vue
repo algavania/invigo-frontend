@@ -5,7 +5,7 @@
                 Halaman Tidak Ditemukan
             </h1>
             <p class="label-size ma-0 mt-4" style="max-width: 48rem; line-height: 1.7rem;">
-                Hmmm... halaman yang kamu tujui tidak ditemukan. Kamu bisa cek kembali alamat yang kamu tuju, atau kembali ke halaman sebelumnya.
+                Hmmm... halaman yang Anda tujui tidak ditemukan. Anda bisa cek kembali alamat yang Anda tuju, atau kembali ke halaman sebelumnya.
             </p>
         </div>
     </v-container>

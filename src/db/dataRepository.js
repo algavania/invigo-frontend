@@ -9,8 +9,10 @@ import {
   query,
   limit,
   where,
+  serverTimestamp,
+  addDoc,
 } from "firebase/firestore";
-
+import axios from "axios";
 const db = getFirestore(firebase);
 
 async function getInvestors(total) {
@@ -45,6 +47,111 @@ async function getInvestors(total) {
       innovators.push(data);
     })
   );
+
+  return innovators;
+}
+
+async function getTopInvestors() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const id = user["uid"];
+  console.log(`https://invigo-backend.onrender.com/getInvestors/${id}`);
+  const res = await axios.get(
+    `https://invigo-backend.onrender.com/getInvestors/${id}`
+  );
+  var ids = [];
+  try {
+    if (res.status == 200) {
+      ids = res.data.top_recommendations;
+    }
+  } catch (e) {
+    ids = [];
+  }
+  var innovators = [];
+  if (ids.length > 0) {
+    const querySnapshot = await getDocs(
+      query(collection(db, "investors"), where("uid", "in", ids))
+    );
+
+    await Promise.all(
+      querySnapshot.docs.map(async (document) => {
+        const docRef = doc(db, "users", document.id);
+        const docSnap = await getDoc(docRef);
+        var data = document.data();
+        data["userData"] = docSnap.data();
+
+        var typeData = [];
+        for (var index = 0; index < data["investType"].length; index++) {
+          var type = data["investType"][index];
+          const docRef = doc(db, "investorTypes", type);
+          const docSnap = await getDoc(docRef);
+          typeData.push(docSnap.data()["name"]);
+        }
+        data["investTypeData"] = typeData;
+        var str = typeData.join(", ");
+        data["typeData"] = str;
+
+        innovators.push(data);
+      })
+    );
+  }
+
+  return innovators;
+}
+
+async function getTopInnovators() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const id = user["uid"];
+  const res = await axios.get(
+    `https://invigo-backend.onrender.com/getInnovators/${id}`
+  );
+  var ids = [];
+  try {
+    if (res.status == 200) {
+      ids = res.data.top_recommendations;
+    }
+  } catch (e) {
+    ids = [];
+  }
+
+  var innovators = [];
+
+  if (ids.length > 0) {
+    const querySnapshot = await getDocs(
+      query(collection(db, "innovators"), where("uid", "in", ids))
+    );
+    await Promise.all(
+      querySnapshot.docs.map(async (document) => {
+        const docRef = doc(db, "users", document.id);
+        const docSnap = await getDoc(docRef);
+        var data = document.data();
+        data["userData"] = docSnap.data();
+
+        var typeData = [];
+        for (var index = 0; index < data["investType"].length; index++) {
+          var type = data["investType"][index];
+          const docRef = doc(db, "investorTypes", type);
+          const docSnap = await getDoc(docRef);
+          typeData.push(docSnap.data()["name"]);
+        }
+        data["investTypeData"] = typeData;
+        var str = typeData.join(", ");
+        data["typeData"] = str;
+
+        var fundingData = [];
+        for (var index = 0; index < data["investStep"].length; index++) {
+          var type = data["investStep"][index];
+          const docRef = doc(db, "fundingTypes", type);
+          const docSnap = await getDoc(docRef);
+          fundingData.push(docSnap.data()["name"]);
+        }
+        data["investStepData"] = fundingData;
+        var str = fundingData.join(", ");
+        data["investData"] = str;
+
+        innovators.push(data);
+      })
+    );
+  }
 
   return innovators;
 }
@@ -140,7 +247,7 @@ async function getDataByUsername(username) {
           const docSnap = await getDoc(docRef);
           typeData.push(docSnap.data()["name"]);
         }
-        console.log('type data', typeData);
+        console.log("type data", typeData);
         data["investTypeData"] = typeData;
         var str = typeData.join(", ");
         data.data["typeData"] = str;
@@ -222,9 +329,29 @@ async function getDataByUsername(username) {
   }
 }
 
+async function addInteraction(id) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user["role"] == "Law Firm") return;
+  const data = {
+    itemId: id,
+    userId: user["uid"],
+    timestamp: serverTimestamp(),
+  };
+  var ref;
+  if (user["role"] == "Investor") {
+    ref = collection(db, "interactionsInInnovator");
+  } else if (user["role"] == "Inovator") {
+    ref = collection(db, "interactions");
+  }
+  await addDoc(ref, data);
+}
+
 export {
   getInvestors,
   getLawFirms,
   getInnovators,
   getDataByUsername,
+  getTopInvestors,
+  getTopInnovators,
+  addInteraction
 };

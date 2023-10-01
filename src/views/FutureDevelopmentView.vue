@@ -5,7 +5,7 @@
                 Halaman dalam Pengembangan
             </h1>
             <p class="label-size ma-0 mt-4" style="max-width: 48rem; line-height: 1.7rem;">
-                Sayangnya, halaman yang kamu tuju sedang dalam masa pengembangan, nih. Tunggu update selanjutnya ya!
+                Sayangnya, halaman yang Anda tuju sedang dalam masa pengembangan, nih. Tunggu update selanjutnya ya!
             </p>
         </div>
     </v-container>
