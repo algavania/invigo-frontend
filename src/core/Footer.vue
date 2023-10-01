@@ -9,7 +9,9 @@
                 <router-link :to="links.privacyPolicy" class="label-size text-color">
                     Kebijakan Privasi
                 </router-link>
-                <p class="label-size custom-text-button">Syarat & Ketentuan</p>
+                <router-link :to="links.termsAndCondiitons" class="label-size text-color">
+                    Syarat & Ketentuan
+                </router-link>
             </div>
         </v-row>
     </v-container>
@@ -21,7 +23,7 @@ export default {
     data: () => ({
         links: {
             privacyPolicy: "/privacy-policy",
-            termsAndAgreements: "/terms-and-agreements"
+            termsAndCondiitons: "/terms-and-conditions"
         }
     })
 };
