@@ -4,9 +4,10 @@
       <v-row>
         <v-col cols="3">
           <div
-            class="w-100 primary"
             style="min-height: 15rem; height: 100%"
-          ></div>
+          >
+          <img :src="data['photoUrl']" alt="Photo" width="100%" height="100%" style="object-fit: contain;" class="pa-4">
+        </div>
         </v-col>
         <v-col cols="7">
           <v-breadcrumbs :items="items" class="ma-0 pa-0 mb-4">
@@ -40,17 +41,52 @@
           <div class="gray700--text">{{ data["data"]["description"] }}</div>
         </v-col>
         <v-col>
-          <v-btn v-if="data['username'] != user['username']" elevation="0" color="primary" class="pa-6" style="width: 100%"
-            >Kirim Pesan</v-btn
-          >
-          <br v-if="data['username'] != user['username']" />
-          <v-btn elevation="0" outlined class="pa-6 mt-4" style="width: 100%">
+          <div v-if="user['role']">
+            <div v-if="pitchData['status'] == 'Diproses'">
+              <v-btn
+                elevation="0"
+                color="primary"
+                class="pa-6 mt-3"
+                style="width: 100%"
+                @click="updatePitching('Diterima')"
+                >Terima</v-btn
+              >
+              <v-btn
+                elevation="0"
+                color="primary"
+                class="pa-6 mt-3 mb-3"
+                outlined
+                @click="updatePitching('Ditolak')"
+                style="width: 100%"
+                >Tolak</v-btn
+              >
+              <br>
+              <br>
+            </div>
+            <v-btn
+              v-if="data['username'] != user['username']"
+              elevation="0"
+              color="primary"
+              class="pa-6"
+              style="width: 100%"
+              >Kirim Pesan</v-btn
+            >
+          </div>
+          <br v-if="data['username'] != user['username'] && user['role'] != 'Investor'" />
+          <v-btn @click="copyUrl()" elevation="0" outlined class="pa-6 mt-4" style="width: 100%">
             <v-icon left dark> mdi-share-variant </v-icon>
 
             Bagikan</v-btn
           >
         </v-col>
       </v-row>
+
+      <div v-if="pitchData['status']" class="my-6">
+        <h2>Status</h2>
+        <div>
+          Kerja Sama <strong>{{ pitchData.status }}</strong>
+        </div>
+      </div>
 
       <v-row>
         <v-col>
@@ -133,7 +169,7 @@
         <h2 class="mb-4">Dokumen</h2>
         <v-row>
           <v-col v-for="data in documents" :key="data.text" cols="6">
-            <DocumentCardComponent :data="data"/>
+            <DocumentCardComponent :data="data" />
           </v-col>
         </v-row>
       </div>
@@ -142,12 +178,11 @@
         <h2 class="mb-4">Dokumen Legal</h2>
         <v-row v-if="data['legalDocs'].length > 0">
           <v-col v-for="data in data['legalDocs']" :key="data.text" cols="6">
-            <DocumentCardComponent :data="data"/>
+            <DocumentCardComponent :data="data" />
           </v-col>
         </v-row>
         <div v-else>Belum ada dokumen legal yang di-upload</div>
       </div>
-
     </v-container>
   </div>
 </template>
@@ -155,12 +190,13 @@
 <script>
 import { EventBus } from "../event-bus";
 import { getDataByUsername } from "../db/dataRepository.js";
-import DocumentCardComponent from '@/components/Detail/DocumentCardComponent.vue';
+import DocumentCardComponent from "@/components/Detail/DocumentCardComponent.vue";
+import { getPitching, updatePitching } from "@/db/pitchingRepository";
 
 export default {
   name: "DetailInovatorView",
   components: {
-    DocumentCardComponent
+    DocumentCardComponent,
   },
   data: () => ({
     data: {},
@@ -179,6 +215,7 @@ export default {
         text: "",
       },
     ],
+    pitchData: {},
     items: [
       {
         text: "Beranda",
@@ -196,45 +233,69 @@ export default {
     user: {},
   }),
   async mounted() {
-    EventBus.$emit("startLoading");
-    try {
-      this.user = JSON.parse(localStorage.getItem('user'));
-      this.data = await getDataByUsername(this.$route.params.username);
-      this.items[2]["text"] = this.data["name"];
-
-      this.about[0]["text"] = this.data["data"]["address"];
-      this.about[1]["text"] = this.data["data"]["totalInvestor"];
-      this.about[2]["text"] = this.data["data"]["websiteUrl"];
-
-      const name = this.data["name"];
-      this.documents = [
-        {
-          title: "Proposal Bisnis",
-          text: "Proposal " + name,
-          url: this.data["data"]["proposalUrl"],
-        },
-        {
-          title: "Pitch Deck",
-          text: "Pitch Deck " + name,
-          url: this.data["data"]["pitchDeckUrl"],
-        },
-        {
-          title: "Demo Produk",
-          text: "Demo Produk " + name,
-          url: this.data["data"]["productDemoUrl"],
-        },
-        {
-          title: "Business Model Canvas",
-          text: "BMC " + name,
-          url: this.data["data"]["bmcUrl"],
-        },
-      ];
-    } catch (e) {
-      EventBus.$emit("showSnackbar", e, false);
-    }
-    EventBus.$emit("stopLoading");
+    this.refreshPage();
   },
-  methods: {},
+  methods: {
+    copyUrl() {
+      navigator.clipboard.writeText(window.location.href);
+      EventBus.$emit("showSnackbar", "Berhasil menyalin link", true);
+    },
+    async updatePitching(status) {
+      EventBus.$emit("startLoading");
+      try {
+        await updatePitching(this.pitchData["id"], status, this.data['uid'], this.user['uid']);
+        await this.refreshPage();
+      } catch (e) {
+        EventBus.$emit("showSnackbar", e, false);
+      }
+      EventBus.$emit("stopLoading");
+    },
+    async refreshPage() {
+      EventBus.$emit("startLoading");
+      try {
+        this.user = JSON.parse(localStorage.getItem("user"));
+        this.data = await getDataByUsername(this.$route.params.username);
+        this.items[2]["text"] = this.data["name"];
+
+        this.about[0]["text"] = this.data["data"]["address"];
+        this.about[1]["text"] = this.data["data"]["totalInvestor"];
+        this.about[2]["text"] = this.data["data"]["websiteUrl"];
+
+        const name = this.data["name"];
+        this.documents = [
+          {
+            title: "Proposal Bisnis",
+            text: "Proposal " + name,
+            url: this.data["data"]["proposalUrl"],
+          },
+          {
+            title: "Pitch Deck",
+            text: "Pitch Deck " + name,
+            url: this.data["data"]["pitchDeckUrl"],
+          },
+          {
+            title: "Demo Produk",
+            text: "Demo Produk " + name,
+            url: this.data["data"]["productDemoUrl"],
+          },
+          {
+            title: "Business Model Canvas",
+            text: "BMC " + name,
+            url: this.data["data"]["bmcUrl"],
+          },
+        ];
+        if (this.user["role"] == "Investor") {
+          this.pitchData = await getPitching(
+            this.user["uid"],
+            this.data["uid"]
+          );
+        }
+      } catch (e) {
+        EventBus.$emit("showSnackbar", e, false);
+      }
+      EventBus.$emit("stopLoading");
+    },
+  },
 };
 </script>
 

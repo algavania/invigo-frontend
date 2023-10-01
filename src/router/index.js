@@ -11,9 +11,21 @@ import NotificationView from "../views/NotificationView.vue";
 import InovatorProfileView from "../views/InovatorProfileView.vue";
 import InvestorProfileView from "../views/InvestorProfileView.vue";
 import FirmProfileView from "../views/FirmProfileView.vue";
+import InovatorsView from "../views/InovatorsView.vue";
+import InvestorsView from "../views/InvestorsView.vue";
+import LawFirmsView from "../views/LawFirmsView.vue";
+import SubscriptionView from "../views/SubscriptionView.vue";
+import PrivacyPolicyView from "../views/PrivacyPolicyView.vue";
+import TermsAndConditionsView from "../views/TermsAndConditionsView.vue";
+import FutureDevelopmentView from "../views/FutureDevelopmentView.vue"
+import PageNotFoundView from "../views/PageNotFoundView.vue"
+// import CollaboratorsView from "../views/CollaboratorsView.vue";
 import VueRouter from "vue-router";
 import auth from "../middlewares/auth";
 import notInovator from "../middlewares/not-inovator";
+import onlyInovator from "../middlewares/only-inovator";
+import onlyInvestor from "../middlewares/only-investor";
+import onlyLawFirm from "../middlewares/only-firm";
 
 Vue.use(VueRouter);
 
@@ -35,6 +47,30 @@ const router = new VueRouter({
       path: "/dashboard",
       name: "dashboard",
       component: DashboardView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/innovators",
+      name: "innovators",
+      component: InovatorsView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/investors",
+      name: "investors",
+      component: InvestorsView,
+      meta: {
+        middleware: [auth],
+      },
+    },
+    {
+      path: "/law-firms",
+      name: "lawFirms",
+      component: LawFirmsView,
       meta: {
         middleware: [auth],
       },
@@ -68,7 +104,7 @@ const router = new VueRouter({
       name: "inovatorProfile",
       component: InovatorProfileView,
       meta: {
-        middleware: [auth],
+        middleware: [auth, onlyInovator],
       },
     },
     {
@@ -76,7 +112,7 @@ const router = new VueRouter({
       name: "investorProfile",
       component: InvestorProfileView,
       meta: {
-        middleware: [auth],
+        middleware: [auth, onlyInvestor],
       },
     },
     {
@@ -84,9 +120,37 @@ const router = new VueRouter({
       name: "firmProfile",
       component: FirmProfileView,
       meta: {
-        middleware: [auth],
+        middleware: [auth, onlyLawFirm],
       },
     },
+    {
+      path: "/collaborators",
+      name: "collaborators",
+      component: FutureDevelopmentView,
+    },
+    {
+      path: "/berlangganan",
+      name: "berlangganan",
+      component: SubscriptionView,
+    },
+    {
+      path: "/privacy-policy",
+      name: "privacyPolicy",
+      component: PrivacyPolicyView,
+    },
+    {
+      path: "/terms-and-conditions",
+      name: "termsAndConditions",
+      component: TermsAndConditionsView,
+    },
+    // {
+    //   path: "/collaborators",
+    //   name: "collaborators",
+    //   component: CollaboratorsView,
+    //   meta: {
+    //     middleware: [auth],
+    //   },
+    // },
     {
       path: "/detail/:username",
       name: "detail",
@@ -118,6 +182,10 @@ const router = new VueRouter({
       meta: {
         middleware: [auth],
       },
+    },
+    {
+      path: "/:notFound",
+      component: PageNotFoundView,
     },
   ],
 });

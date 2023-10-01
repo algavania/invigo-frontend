@@ -1,52 +1,29 @@
 <template>
   <v-dialog class="w-75" v-model="dialogVisible" width="75%">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn
-        v-if="isFilledButton"
-        v-bind="attrs"
-        v-on="on"
-        height="50"
-        color="primary"
-        @click="checkAuth()"
-        class="white--text"
-        >{{ buttonText }}</v-btn
-      >
+      <v-btn v-if="isFilledButton" v-bind="attrs" v-on="on" height="50" :color="isAccentButton ? 'accent800' : 'primary'"
+        @click="checkAuth()" class="white--text">{{ buttonText }}</v-btn>
       <p v-else class="small-body-size">
         Belum memiliki akun?
-        <span
-          v-bind="attrs"
-          v-on="on"
-          class="primary--text font-weight-medium hover-pointer-text"
-          >Daftar</span
-        >
+        <span v-bind="attrs" v-on="on" class="primary--text font-weight-medium hover-pointer-text">Daftar</span>
       </p>
     </template>
 
-    <template v-slot:default="{}">
+    <template v-slot:default="{ }">
       <v-card>
         <div style="padding: 0">
           <v-row>
             <v-col cols="6" class="bg-green-gradient w-100 pa-0">
               <div style="height: 100%">
-                <div
-                  id="close-button"
-                  @click="closeDialog()"
-                  class="pa-10 d-flex align-center hover-pointer"
-                  style="width: fit-content"
-                >
+                <div id="close-button" @click="closeDialog()" class="pa-10 d-flex align-center hover-pointer"
+                  style="width: fit-content">
                   <v-icon large color="white">mdi-close</v-icon>
-                  <p
-                    class="label-size font-weight-medium white--text ml-3 mb-1"
-                  >
+                  <p class="label-size font-weight-medium white--text ml-3 mb-1">
                     Tutup
                   </p>
                 </div>
                 <div class="w-100 d-flex align-end justify-end" style="height: 100%;">
-                  <img
-                    :src="require('@/assets/bg-login.svg')"
-                    alt="Background"
-                    style="height: 90%"
-                  />
+                  <img :src="require('@/assets/bg-login.svg')" alt="Background" style="height: 90%" />
                 </div>
               </div>
             </v-col>
@@ -54,137 +31,60 @@
               <div class="py-10 px-12" style="position: relative; height: 100%;">
                 <p class="label-size font-weight-medium">Buat Akun Baru</p>
                 <div class="slate200 step-indicator d-flex mt-6 mb-8">
-                  <div
-                    style="flex: 4"
-                    class="bg-green-gradient step-indicator"
-                    v-if="currentStep == 1"
-                  ></div>
+                  <div style="flex: 4" class="bg-green-gradient step-indicator" v-if="currentStep == 1"></div>
                   <div style="flex: 4" class="step-indicator"></div>
-                  <div
-                    style="flex: 4"
-                    class="bg-green-gradient step-indicator"
-                    v-if="currentStep == 2"
-                  ></div>
+                  <div style="flex: 4" class="bg-green-gradient step-indicator" v-if="currentStep == 2"></div>
                   <div style="flex: 4" class="step-indicator"></div>
-                  <div
-                    style="flex: 4"
-                    class="bg-green-gradient step-indicator"
-                    v-if="currentStep == 3"
-                  ></div>
+                  <div style="flex: 4" class="bg-green-gradient step-indicator" v-if="currentStep == 3"></div>
                 </div>
 
                 <div v-if="currentStep == 1">
                   <p class="small-body-size mb-5">
                     Pilih peran Anda dalam platform ini.
                   </p>
-                  <RadioGroup
-                    :groupModel="selectedRole"
-                    :values="roles"
-                    :isColumn="true"
-                  />
+                  <RadioGroup :groupModel="selectedRole" :values="roles" :isColumn="true" />
                   <p class="small-body-size mb-2">
                     Dengan mendaftarkan akun, Anda telah menyetujui
-                    <span
-                      class="primary--text font-weight-medium hover-pointer-text"
-                      >Kebijakan Privasi</span
-                    >
+                    <span @click="closeDialog()" class="primary--text font-weight-medium hover-pointer-text"><router-link :to="links.privacyPolicy" style="text-decoration: none;">Kebijakan Privasi.</router-link></span>
                     serta
-                    <span
-                      class="primary--text font-weight-medium hover-pointer-text"
-                      >Syarat & Ketentuan.</span
-                    >
+                    <span @click="closeDialog()" class="primary--text font-weight-medium hover-pointer-text"><router-link :to="links.termsAndConditions" style="text-decoration: none;">Syarat & Ketentuan.</router-link></span>
                   </p>
-                  <v-btn
-                    @click="currentStep++"
-                    class="mt-16 mb-3"
-                    color="primary"
-                    height="50"
-                    elevation="0"
-                    style="width: 100%;"
-                    >Buat Akun</v-btn
-                  >
+                  <v-btn @click="currentStep++" class="mt-16 mb-3" color="primary" height="50" elevation="0"
+                    style="width: 100%;">Buat Akun</v-btn>
                   <LoginComponent :isTextButton="false" />
                 </div>
 
                 <div v-else-if="currentStep == 2">
                   <p class="small-body-size mb-5">Isi formulir di bawah ini.</p>
                   <v-form ref="form">
-                    <v-text-field
-                      v-model="name"
-                      :rules="requiredRules"
-                      label="Nama"
-                      outlined
-                      dense
-                    />
-                    <v-text-field
-                      v-model="email"
-                      :rules="emailRules"
-                      type="email"
-                      label="Email"
-                      outlined
-                      dense
-                    />
-                    <v-text-field
-                      label="Nama Pengguna"
-                      outlined
-                      dense
-                    />
+                    <v-text-field v-model="name" :rules="requiredRules" label="Nama" outlined dense />
+                    <v-text-field v-model="email" :rules="emailRules" type="email" label="Email" outlined dense />
+                    <v-text-field label="Nama Pengguna" outlined dense />
                     <v-row>
                       <v-col cols="6">
-                        <v-text-field
-                          v-model="password"
-                          :append-icon="
-                            isPasswordObscure ? 'mdi-eye-off' : 'mdi-eye'
-                          "
-                          :type="isPasswordObscure ? 'password' : 'text'"
-                          :rules="passwordRules"
-                          dense
-                          label="Kata Sandi"
-                          outlined
-                          @click:append="
+                        <v-text-field v-model="password" :append-icon="isPasswordObscure ? 'mdi-eye-off' : 'mdi-eye'
+                          " :type="isPasswordObscure ? 'password' : 'text'" :rules="passwordRules" dense
+                          label="Kata Sandi" outlined @click:append="
                             isPasswordObscure = !isPasswordObscure
-                          "
-                        />
+                            " />
                       </v-col>
                       <v-col cols="6">
-                        <v-text-field
-                          v-model="confirmPassword"
-                          :rules="confirmPasswordRules"
-                          :append-icon="
-                            isConfirmObscure ? 'mdi-eye-off' : 'mdi-eye'
-                          "
-                          :type="isConfirmObscure ? 'password' : 'text'"
-                          dense
-                          label="Konfirmasi"
-                          outlined
+                        <v-text-field v-model="confirmPassword" :rules="confirmPasswordRules" :append-icon="isConfirmObscure ? 'mdi-eye-off' : 'mdi-eye'
+                          " :type="isConfirmObscure ? 'password' : 'text'" dense label="Konfirmasi" outlined
                           @click:append="
                             isConfirmObscure = !isConfirmObscure
-                          "
-                        />
+                            " />
                       </v-col>
                     </v-row>
                   </v-form>
-                  <p class="small-body-size">
+                  <p class="small-body-size mb-2">
                     Dengan mendaftarkan akun, Anda telah menyetujui
-                    <span
-                      class="primary--text font-weight-medium hover-pointer-text"
-                      >Kebijakan Privasi</span
-                    >
+                    <span @click="closeDialog()" class="primary--text font-weight-medium hover-pointer-text"><router-link :to="links.privacyPolicy" style="text-decoration: none;">Kebijakan Privasi.</router-link></span>
                     serta
-                    <span
-                      class="primary--text font-weight-medium hover-pointer-text"
-                      >Syarat & Ketentuan.</span
-                    >
+                    <span @click="closeDialog()" class="primary--text font-weight-medium hover-pointer-text"><router-link :to="links.termsAndConditions" style="text-decoration: none;">Syarat & Ketentuan.</router-link></span>
                   </p>
-                  <v-btn
-                    @click="currentStep++"
-                    class="mt-4 mb-3 w-100"
-                    color="primary"
-                    height="50"
-                    elevation="0"
-                    style="width: 100%;"
-                    >Buat Akun</v-btn
-                  >
+                  <v-btn @click="currentStep++" class="mt-4 mb-3 w-100" color="primary" height="50" elevation="0"
+                    style="width: 100%;">Buat Akun</v-btn>
                   <LoginComponent :isTextButton="false" />
                 </div>
 
@@ -192,20 +92,11 @@
                   <p class="small-body-size mb-5">Sukses Membuat Akun.</p>
                   <p class="small-body-size mb-2">
                     Silakan cek email
-                    <span
-                      class="primary--text font-weight-medium hover-pointer-text"
-                      >blablabla@gmail.com</span
-                    >
+                    <span class="primary--text font-weight-medium hover-pointer-text">blablabla@gmail.com</span>
                     yang telah didaftarkan untuk konfirmasi.
                   </p>
-                  <v-btn
-                    class="w-100 mt-auto"
-                    color="primary"
-                    height="50"
-                    elevation="0"
-                    style="position: absolute; bottom: 5rem; width: 100%;"
-                    >Buat Akun</v-btn
-                  >
+                  <v-btn class="w-100 mt-auto" color="primary" height="50" elevation="0"
+                    style="position: absolute; bottom: 5rem; width: 100%;">Buat Akun</v-btn>
                 </div>
               </div>
             </v-col>
@@ -228,8 +119,12 @@ export default {
     RadioGroup,
     LoginComponent,
   },
-  props: ["buttonText", "isFilledButton", "isVisible"],
+  props: ["buttonText", "isFilledButton", "isVisible", "isAccentButton"],
   data: () => ({
+    links: {
+      privacyPolicy: "/privacy-policy",
+      termsAndConditions: "/terms-and-conditions",
+    },
     dialogVisible: false,
     currentStep: 1,
     selectedRole: "Inovator",
