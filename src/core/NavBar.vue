@@ -20,8 +20,7 @@
               />
             </router-link>
           </v-col>
-          <v-spacer></v-spacer>
-          <v-col justify-end align-self="center">
+          <v-col class="flex-grow-1 align-center d-flex justify-end">
             <v-toolbar-items class="toolbar-item" v-if="!hasLogin">
               <div v-for="link in links.beforeLogin" :key="link.to">
                 <v-btn
@@ -169,6 +168,7 @@ export default {
       inovatorProfile: "/inovator-profile",
       investorProfile: "/investor-profile",
       firmProfile: "/firm-profile",
+      collaborators: "/future-development",
       beforeLogin: [
         { to: "/", text: "Beranda" },
         { to: "/layanan", text: "Layanan" },

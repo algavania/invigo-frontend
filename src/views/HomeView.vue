@@ -2,12 +2,28 @@
   <div class="gray50 pb-8">
     <v-container>
       <LandingComponent />
-      <FeaturesComponent class="mt-5 mb-16"></FeaturesComponent>
-      <div v-for="onboarding in onboardings" :key="onboarding.title">
-        <OnboardingComponent :title="onboarding.title" :description="onboarding.description" :image="onboarding.image"
-          :isLeft="onboarding.isLeft">
+      <FeaturesComponent class="mt-5 mb-14"></FeaturesComponent>
+      <div class="pt-2 pb-12">
+        <div v-for="onboarding in onboardings" :key="onboarding.title">
+          <OnboardingComponent :title="onboarding.title" :description="onboarding.description" :image="onboarding.image"
+            :isLeft="onboarding.isLeft">
 
-        </OnboardingComponent>
+          </OnboardingComponent>
+        </div>
+      </div>
+      <div class="mb-16 bg-orange-gradient rounded-lg d-flex flex-column justify-center align-center text-center"
+        style="height: 20rem; position: relative">
+        <h2 class="subheading-size white--text font-weight-bold">
+          Mulai kembangkan sekarang
+        </h2>
+        <p class="white--text label-size mt-2 mb-6" style="max-width: 20rem">
+          Bergabung dan dapatkan efisiensi kecepatan bisnis Anda.
+        </p>
+        <RegisterComponent
+          :buttonText="'Mulai Sekarang'"
+          :isFilledButton="true"
+          :isAccentButton="true"
+        ></RegisterComponent>
       </div>
     </v-container>
   </div>
@@ -17,13 +33,15 @@
 import LandingComponent from '../components/Home/LandingComponent.vue';
 import FeaturesComponent from '../components/Home/FeaturesComponent.vue';
 import OnboardingComponent from '../components/Home/OnboardingComponent.vue';
+import RegisterComponent from '../components/Authentication/RegisterComponent.vue';
 
 export default {
   name: 'HomeView',
   components: {
     LandingComponent,
     FeaturesComponent,
-    OnboardingComponent
+    OnboardingComponent,
+    RegisterComponent
   },
   data: () => ({
     onboardings: [

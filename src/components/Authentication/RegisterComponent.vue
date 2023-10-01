@@ -6,7 +6,7 @@
         v-bind="attrs"
         v-on="on"
         height="50"
-        color="primary"
+        :color="isAccentButton ? 'accent800' : 'primary'"
         @click="checkAuth()"
         class="white--text"
         >{{ buttonText }}</v-btn
@@ -228,7 +228,7 @@ export default {
     RadioGroup,
     LoginComponent,
   },
-  props: ["buttonText", "isFilledButton", "isVisible"],
+  props: ["buttonText", "isFilledButton", "isVisible", "isAccentButton"],
   data: () => ({
     dialogVisible: false,
     currentStep: 1,

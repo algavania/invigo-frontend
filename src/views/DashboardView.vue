@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div style="height: 20rem; position: relative" class="mt-1">
+    <div style="height: 18rem; position: relative" class="mt-1">
       <div class="w-100 bg-orange-gradient rounded-lg d-flex flex-column justify-center align-center text-center"
         style="height: 18rem; position: relative">
         <h2 class="subheading-size white--text font-weight-bold">
@@ -12,7 +12,7 @@
         <img :src="require(`@/assets/bg-dashboard.svg`)" alt="Background"
           style="position: absolute; left: 0; right: 0; margin: auto" />
       </div>
-      <v-card style="height: 4rem; max-width: 35rem" class="search-card" outlined></v-card>
+      <!-- <v-card style="height: 4rem; max-width: 35rem" class="search-card" outlined></v-card> -->
     </div>
 
     <div class="mt-16 pt-4" v-if="role != 'Investor'">
