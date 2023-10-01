@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <p class="font-weight-medium flex-grow-1 mr-4 my-0">{{ notification.senderName }}</p>
-                    <p class="gray500--text small-body-size ma-0">{{ notification.createdAt }}</p>
+                    <p class="gray500--text small-body-size ma-0">{{ notification.date }}</p>
                 </div>
                 <p class="gray700--text ma-0 mt-2">{{ notification.description }}</p>
                 <div v-if="notification.type != 'notification'" class="mt-4">
@@ -31,10 +31,11 @@
                             Kirim Pesan
                     </v-btn>
                     <v-btn
-                        v-else-if="notification.type == 'pitching request'"
+                        v-else-if="notification.type == 'pitching-request'"
                         class="w-100"
                         color="primary"
                         height="40"
+                        :to="'/inovator/' + notification.senderUsername"
                         elevation="0"
                         style="width: 100%"
                         >
@@ -47,6 +48,7 @@
                         height="40"
                         elevation="0"
                         style="width: 100%"
+                        :to="'/chat'"
                         >
                             Lihat Pesan
                     </v-btn>

@@ -140,6 +140,7 @@ async function getDataByUsername(username) {
           const docSnap = await getDoc(docRef);
           typeData.push(docSnap.data()["name"]);
         }
+        console.log('type data', typeData);
         data["investTypeData"] = typeData;
         var str = typeData.join(", ");
         data.data["typeData"] = str;

@@ -160,6 +160,7 @@ export default {
         try {
           await login(this.email, this.password);
           (this.email = ""), (this.password = ""), (this.dialog = false);
+          EventBus.$emit("triggerCheckLoginToken");
           this.$router.push({ name: "dashboard" });
         } catch (e) {
           EventBus.$emit("showSnackbar", e, false);
