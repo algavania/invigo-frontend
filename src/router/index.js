@@ -14,6 +14,7 @@ import FirmProfileView from "../views/FirmProfileView.vue";
 import InovatorsView from "../views/InovatorsView.vue";
 import InvestorsView from "../views/InvestorsView.vue";
 import LawFirmsView from "../views/LawFirmsView.vue";
+import SubscriptionView from "../views/SubscriptionView.vue";
 import PrivacyPolicyView from "../views/PrivacyPolicyView.vue";
 import TermsAndConditionsView from "../views/TermsAndConditionsView.vue";
 import FutureDevelopmentView from "../views/FutureDevelopmentView.vue"
@@ -130,7 +131,7 @@ const router = new VueRouter({
     {
       path: "/berlangganan",
       name: "berlangganan",
-      component: FutureDevelopmentView,
+      component: SubscriptionView,
     },
     {
       path: "/privacy-policy",

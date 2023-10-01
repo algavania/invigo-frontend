@@ -95,6 +95,11 @@
                         Profil Saya
                       </v-list-item-title>
                     </v-list-item>
+                    <v-list-item class="user-menu hover-pointer" @click="redirectToSubscription()">
+                      <v-list-item-title>
+                        Berlangganan
+                      </v-list-item-title>
+                    </v-list-item>
                     <v-list-item
                       class="user-menu hover-pointer"
                       @click="logout()"
@@ -193,6 +198,9 @@ export default {
       if (this.userRole == "Inovator") this.$router.push("/inovator-profile");
       else if (this.userRole == "Investor") this.$router.push("/investor-profile");
       else if (this.userRole == "Firm") this.$router.push("/firm-profile");
+    },
+    redirectToSubscription() {
+      this.$router.push("/berlangganan");
     },
     logout() {
       localStorage.clear();
